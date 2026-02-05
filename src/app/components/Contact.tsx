@@ -1,32 +1,13 @@
 import { motion } from "motion/react";
 import {
   Phone,
-  Mail,
   MapPin,
   Clock,
-  Send,
   Instagram,
   MessageCircle,
 } from "lucide-react";
-import { useState } from "react";
 
 export function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    course: "",
-    message: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Here you would typically send the form data to a backend
-    alert(
-      "Rahmat! Tez orada siz bilan bog'lanamiz. \n\nHozircha qo'ng'iroq qiling: +998 90 123 45 67"
-    );
-    setFormData({ name: "", phone: "", course: "", message: "" });
-  };
-
   const contactInfo = [
     {
       icon: Phone,
@@ -173,211 +154,101 @@ export function Contact() {
           </div>
         </motion.div>
 
-        {/* Contact Form */}
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Form */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100"
-          >
-            <h3 className="text-2xl font-bold mb-6 text-gray-800">
-              Bepul konsultatsiya uchun ariza qoldiring
-            </h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Ismingiz
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                  placeholder="Ismingizni kiriting"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Telefon raqam
-                </label>
-                <input
-                  type="tel"
-                  required
-                  value={formData.phone}
-                  onChange={(e) =>
-                    setFormData({ ...formData, phone: e.target.value })
-                  }
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                  placeholder="+998 90 123 45 67"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Qaysi kursga qiziqasiz?
-                </label>
-                <select
-                  required
-                  value={formData.course}
-                  onChange={(e) =>
-                    setFormData({ ...formData, course: e.target.value })
-                  }
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                >
-                  <option value="">Tanlang</option>
-                  <option value="Matematika Abituriyentlar uchun">
-                    Matematika Abituriyentlar uchun
-                  </option>
-                  <option value="SAT">SAT</option>
-                  <option value="Prezident va Al Xorazmiy maktabiga tayyorlov">
-                    Prezident va Al Xorazmiy maktabiga tayyorlov
-                  </option>
-                  <option value="Mirzo Ulug'bek maktabiga tayyorlov">
-                    Mirzo Ulug'bek maktabiga tayyorlov
-                  </option>
-                  <option value="Al-Beruniy maktabiga tayyorlov">
-                    Al-Beruniy maktabiga tayyorlov
-                  </option>
-                  <option value="Litseylarga tayyorlov">
-                    Litseylarga tayyorlov
-                  </option>
-                  <option value="Ingliz tili va IELTS kurslari">
-                    Ingliz tili va IELTS kurslari
-                  </option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Xabar (ixtiyoriy)
-                </label>
-                <textarea
-                  value={formData.message}
-                  onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
-                  }
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
-                  placeholder="Qo'shimcha savollaringiz yoki izohlaringiz"
-                />
-              </div>
-
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full bg-gradient-to-r from-blue-600 to-teal-500 text-white px-8 py-4 rounded-lg font-medium shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-2"
-              >
-                <Send className="size-5" />
-                Yuborish
-              </motion.button>
-            </form>
-          </motion.div>
-
-          {/* Map/Additional Info */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6"
-          >
-            {/* Map placeholder */}
-            <div className="bg-gradient-to-br from-blue-50 to-teal-50 rounded-2xl p-8 h-64 flex items-center justify-center border border-gray-200">
-              <div className="text-center">
-                <MapPin className="size-16 text-blue-600 mx-auto mb-4" />
-                <h4 className="font-bold text-xl text-gray-800 mb-2">
-                  Bizning Manzilimiz
-                </h4>
-                <p className="text-gray-600">
-                  Qorako'l tumani, Bukhara viloyati
-                  <br />
-                  O'zbekiston
-                </p>
-              </div>
-            </div>
-
-            {/* Quick Contact */}
-            <div className="bg-gradient-to-br from-blue-600 to-teal-500 rounded-2xl p-8 text-white">
-              <h4 className="text-2xl font-bold mb-4">
-                Tezkor bog'lanish uchun
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="space-y-6"
+        >
+          {/* Map placeholder */}
+          <div className="bg-gradient-to-br from-blue-50 to-teal-50 rounded-2xl p-8 h-64 flex items-center justify-center border border-gray-200">
+            <div className="text-center">
+              <MapPin className="size-16 text-blue-600 mx-auto mb-4" />
+              <h4 className="font-bold text-xl text-gray-800 mb-2">
+                Bizning Manzilimiz
               </h4>
-              <p className="text-white/90 mb-6">
-                Ish vaqti: 08:00–18:00. Telegram’da 24/7 yozishingiz mumkin
-                (javob ish vaqtida).
+              <p className="text-gray-600">
+                Qorako'l tumani, Bukhara viloyati
+                <br />
+                O'zbekiston
               </p>
-              <div className="space-y-3">
-                <a
-                  href="tel:+998785558555"
-                  className="block bg-white/20 backdrop-blur-sm rounded-lg p-4 hover:bg-white/30 transition-colors"
-                >
-                  <div className="flex items-center gap-3">
-                    <Phone className="size-5" />
-                    <div>
-                      <div className="text-sm opacity-80">Qo'ng'iroq qiling</div>
-                      <div className="font-bold">+998 78 555 8 555</div>
-                    </div>
-                  </div>
-                </a>
-                <a
-                  href="https://t.me/qorakolziyo"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block bg-white/20 backdrop-blur-sm rounded-lg p-4 hover:bg-white/30 transition-colors"
-                >
-                  <div className="flex items-center gap-3">
-                    <MessageCircle className="size-5" />
-                    <div>
-                      <div className="text-sm opacity-80">Telegram</div>
-                      <div className="font-bold">@qorakolziyo</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
             </div>
+          </div>
 
-            {/* Additional benefits */}
-            <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
-              <h4 className="font-bold text-lg mb-4 text-gray-800">
-                Nima uchun bugun qo'ng'iroq qilishingiz kerak?
-              </h4>
-              <ul className="space-y-3">
-                {[
-                  "Bepul konsultatsiya va yo'l-yo'riq",
-                  "Kurs va narxlar to'g'risida batafsil ma'lumot",
-                  "Maxsus chegirmalar va takliflar",
-                  "Moslashuvchan to'lov rejalari",
-                ].map((item, index) => (
-                  <li key={index} className="flex items-start gap-2">
-                    <div className="bg-gradient-to-br from-blue-600 to-teal-500 rounded-full p-1 mt-0.5">
-                      <svg
-                        className="size-3 text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={3}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    </div>
-                    <span className="text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
+          {/* Quick Contact */}
+          <div className="bg-gradient-to-br from-blue-600 to-teal-500 rounded-2xl p-8 text-white">
+            <h4 className="text-2xl font-bold mb-4">
+              Tezkor bog'lanish uchun
+            </h4>
+            <p className="text-white/90 mb-6">
+              Ish vaqti: 08:00–18:00. Telegram’da 24/7 yozishingiz mumkin
+              (javob ish vaqtida).
+            </p>
+            <div className="space-y-3">
+              <a
+                href="tel:+998785558555"
+                className="block bg-white/20 backdrop-blur-sm rounded-lg p-4 hover:bg-white/30 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <Phone className="size-5" />
+                  <div>
+                    <div className="text-sm opacity-80">Qo'ng'iroq qiling</div>
+                    <div className="font-bold">+998 78 555 8 555</div>
+                  </div>
+                </div>
+              </a>
+              <a
+                href="https://t.me/qorakolziyo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block bg-white/20 backdrop-blur-sm rounded-lg p-4 hover:bg-white/30 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <MessageCircle className="size-5" />
+                  <div>
+                    <div className="text-sm opacity-80">Telegram</div>
+                    <div className="font-bold">@qorakolziyo</div>
+                  </div>
+                </div>
+              </a>
             </div>
-          </motion.div>
-        </div>
+          </div>
+
+          {/* Additional benefits */}
+          <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+            <h4 className="font-bold text-lg mb-4 text-gray-800">
+              Nima uchun bugun qo'ng'iroq qilishingiz kerak?
+            </h4>
+            <ul className="space-y-3">
+              {[
+                "Bepul konsultatsiya va yo'l-yo'riq",
+                "Kurs va narxlar to'g'risida batafsil ma'lumot",
+                "Maxsus chegirmalar va takliflar",
+                "Moslashuvchan to'lov rejalari",
+              ].map((item, index) => (
+                <li key={index} className="flex items-start gap-2">
+                  <div className="bg-gradient-to-br from-blue-600 to-teal-500 rounded-full p-1 mt-0.5">
+                    <svg
+                      className="size-3 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={3}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

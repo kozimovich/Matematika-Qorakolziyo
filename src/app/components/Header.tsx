@@ -1,9 +1,15 @@
 import { AnimatePresence, motion } from "motion/react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon, Monitor } from "lucide-react";
 import { useState } from "react";
 const logo = "/assets/header-logo.png";
 
-export function Header() {
+type HeaderProps = {
+  theme: "light" | "dark" | "system";
+  isDark: boolean;
+  onToggleTheme: () => void;
+};
+
+export function Header({ theme, isDark, onToggleTheme }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
@@ -59,6 +65,24 @@ export function Header() {
                 {item.name}
               </motion.button>
             ))}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={onToggleTheme}
+              aria-label="Mavzu rejimini o'zgartirish"
+              className="inline-flex items-center gap-2 rounded-lg border border-gray-200 dark:border-gray-700 px-3 py-2 text-gray-700 dark:text-gray-200 hover:text-[#32368d] dark:hover:text-[#ff5e2c] transition-colors"
+            >
+              {theme === "system" ? (
+                <Monitor className="size-5" />
+              ) : isDark ? (
+                <Moon className="size-5" />
+              ) : (
+                <Sun className="size-5" />
+              )}
+              <span className="text-sm hidden lg:inline">
+                {theme === "system" ? "Avto" : isDark ? "Tungi" : "Yorug'"}
+              </span>
+            </motion.button>
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -100,6 +124,27 @@ export function Header() {
                   {item.name}
                 </button>
               ))}
+              <button
+                onClick={onToggleTheme}
+                className="block w-full text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-[#32368d] dark:hover:text-[#ff5e2c] transition-colors mt-2"
+              >
+                <span className="inline-flex items-center gap-2">
+                  {theme === "system" ? (
+                    <Monitor className="size-5" />
+                  ) : isDark ? (
+                    <Moon className="size-5" />
+                  ) : (
+                    <Sun className="size-5" />
+                  )}
+                  <span>
+                    {theme === "system"
+                      ? "Avto rejim"
+                      : isDark
+                        ? "Tungi rejim"
+                        : "Yorug' rejim"}
+                  </span>
+                </span>
+              </button>
               <a
                 href="tel:+998785558555"
                 className="block w-full text-center bg-gradient-to-r from-[#32368d] to-[#ff5e2c] text-white px-6 py-3 rounded-lg font-medium mt-4"
