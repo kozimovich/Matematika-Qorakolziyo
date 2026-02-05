@@ -1,5 +1,5 @@
 
-  # O'quv markazi saytini yaratish
+  # O‘zbekistondagi eng katta matematika markazi.
 
   This is a code bundle for O'quv markazi saytini yaratish. The original project is available at https://www.figma.com/design/EozcyPq6icRX7WjJ5wUARb/O-quv-markazi-saytini-yaratish.
 
