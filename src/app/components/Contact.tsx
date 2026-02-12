@@ -20,7 +20,7 @@ export function Contact() {
       icon: MapPin,
       title: "Manzillarimiz",
       content: "Chorsu, Olmazor, Shahriston, Universam, Novza, Sergeli",
-      link: "https://maps.google.com",
+      link: "https://t.me/qorakolziyo_manzillar",
       color: "from-teal-500 to-teal-600",
     },
     {
@@ -161,21 +161,6 @@ export function Contact() {
           transition={{ duration: 0.6 }}
           className="space-y-6"
         >
-          {/* Map placeholder */}
-          <div className="bg-gradient-to-br from-blue-50 to-teal-50 rounded-2xl p-8 h-64 flex items-center justify-center border border-gray-200">
-            <div className="text-center">
-              <MapPin className="size-16 text-blue-600 mx-auto mb-4" />
-              <h4 className="font-bold text-xl text-gray-800 mb-2">
-                Bizning Manzilimiz
-              </h4>
-              <p className="text-gray-600">
-                Qorako'l tumani, Bukhara viloyati
-                <br />
-                O'zbekiston
-              </p>
-            </div>
-          </div>
-
           {/* Quick Contact */}
           <div className="bg-gradient-to-br from-blue-600 to-teal-500 rounded-2xl p-8 text-white">
             <h4 className="text-2xl font-bold mb-4">

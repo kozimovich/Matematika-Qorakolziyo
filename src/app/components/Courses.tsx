@@ -7,7 +7,6 @@ export function Courses() {
       icon: Calculator,
       title: "Matematika Abituriyentlar uchun",
       description: "9-10-11-sinflar uchun",
-      duration: "8-12 oy",
       color: "from-blue-500 to-blue-600",
       features: [
         "Matematika I qism",
@@ -23,7 +22,6 @@ export function Courses() {
       icon: Trophy,
       title: "SAT",
       description: "Xalqaro standart test",
-      duration: "6-10 oy",
       color: "from-purple-500 to-purple-600",
       features: [
         "SAT Math tayyorlov",
@@ -36,7 +34,6 @@ export function Courses() {
       icon: Target,
       title: "Prezident va Al Xorazmiy maktabiga tayyorlov",
       description: "2-3-4-sinflar uchun",
-      duration: "6-8 oy",
       color: "from-teal-500 to-teal-600",
       features: [
         "Yosh iqtidor egalari uchun 1-qism",
@@ -50,7 +47,6 @@ export function Courses() {
       icon: Calculator,
       title: "Mirzo Ulug'bek maktabiga tayyorlov",
       description: "4-5-6-sinflar uchun",
-      duration: "6-8 oy",
       color: "from-indigo-500 to-indigo-600",
       features: [
         "Matematika asoslari",
@@ -63,7 +59,6 @@ export function Courses() {
       icon: Calculator,
       title: "Al-Beruniy maktabiga tayyorlov",
       description: "7-8-sinflar uchun",
-      duration: "6-10 oy",
       color: "from-orange-500 to-orange-600",
       features: [
         "Matematika chuqur",
@@ -76,7 +71,6 @@ export function Courses() {
       icon: Calculator,
       title: "Litseylarga tayyorlov",
       description: "7-8-9-sinflar uchun",
-      duration: "6-10 oy",
       color: "from-green-500 to-green-600",
       features: [
         "Matematika",
@@ -89,7 +83,6 @@ export function Courses() {
       icon: Globe2,
       title: "Ingliz tili va IELTS kurslari",
       description: "Barcha darajalar uchun",
-      duration: "6-12 oy",
       color: "from-pink-500 to-pink-600",
       features: [
         "Beginner - Advanced",
@@ -152,13 +145,6 @@ export function Courses() {
 
               {/* Content */}
               <div className="p-6">
-                <div className="flex justify-between items-center mb-4 pb-4 border-b border-gray-100">
-                  <div>
-                    <p className="text-xs text-gray-500">Davomiyligi</p>
-                    <p className="font-semibold text-gray-800">{course.duration}</p>
-                  </div>
-                </div>
-
                 <div className="space-y-2 mb-6">
                   {course.features.map((feature, idx) => (
                     <div key={idx} className="flex items-start gap-2">

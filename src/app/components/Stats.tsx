@@ -49,7 +49,7 @@ export function Stats() {
     },
     {
       icon: Award,
-      value: 300,
+      value: 700,
       suffix: "+",
       label: "Yutuqlar va mukofotlar",
       color: "from-purple-500 to-purple-600",
