@@ -80,6 +80,31 @@ export function Courses() {
       ],
     },
     {
+      icon: Calculator,
+      title: "Fizika",
+      description: "7-11-sinflar uchun",
+      color: "from-sky-500 to-sky-600",
+      features: [
+        "Nazariy va amaliy darslar",
+        "Masalalar yechish",
+        "Laboratoriya ishlariga tayyorlov",
+        "Imtihon va olimpiada savollari",
+      ],
+    },
+    {
+      icon: Target,
+      title: "Ona tili",
+      description: "5-11-sinflar uchun",
+      color: "from-amber-500 to-amber-600",
+      features: [
+        "Imlo va grammatik qoidalar",
+        "Matn tahlili",
+        "Diktant va yozma mashqlar",
+        "Imtihon tayyorlov",
+      ],
+    },
+
+    {
       icon: Globe2,
       title: "Ingliz tili va IELTS kurslari",
       description: "Barcha darajalar uchun",
