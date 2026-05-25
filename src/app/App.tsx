@@ -7,6 +7,7 @@ import { Stats } from "./components/Stats";
 import { Testimonials } from "./components/Testimonials";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
+import { AdminPanel } from "./components/AdminPanel";
 import { useEffect, useState } from "react";
 
 type ThemeMode = "light" | "dark" | "system";
@@ -14,6 +15,7 @@ type ThemeMode = "light" | "dark" | "system";
 export default function App() {
   const [theme, setTheme] = useState<ThemeMode>("system");
   const [isDark, setIsDark] = useState(false);
+  const [isAdminRoute, setIsAdminRoute] = useState(false);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
@@ -50,6 +52,22 @@ export default function App() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  useEffect(() => {
+    const checkRoute = () => {
+      const path = window.location.pathname;
+      const hash = window.location.hash;
+      setIsAdminRoute(path.endsWith("/admin") || hash === "#/admin");
+    };
+
+    checkRoute();
+    window.addEventListener("hashchange", checkRoute);
+    window.addEventListener("popstate", checkRoute);
+    return () => {
+      window.removeEventListener("hashchange", checkRoute);
+      window.removeEventListener("popstate", checkRoute);
+    };
+  }, []);
+
   const cycleTheme = () => {
     setTheme((current) => {
       if (current === "system") return "light";
@@ -57,6 +75,10 @@ export default function App() {
       return "system";
     });
   };
+
+  if (isAdminRoute) {
+    return <AdminPanel />;
+  }
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">

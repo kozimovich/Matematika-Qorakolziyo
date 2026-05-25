@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { Star, Send } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { supabase } from "@/lib/supabase";
 
 interface Testimonial {
   id: string;
@@ -8,11 +9,26 @@ interface Testimonial {
   course: string;
   rating: number;
   comment: string;
-  date: string;
+  created_at: string;
+}
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (
+        container: HTMLElement,
+        options: { sitekey: string; theme?: "light" | "dark" | "auto" }
+      ) => string;
+      reset: (widgetId?: string) => void;
+      remove: (widgetId: string) => void;
+    };
+  }
 }
 
 export function Testimonials() {
+  const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined;
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
     course: "",
@@ -20,62 +36,115 @@ export function Testimonials() {
     comment: "",
   });
   const [showForm, setShowForm] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const turnstileContainerRef = useRef<HTMLDivElement | null>(null);
+  const turnstileWidgetIdRef = useRef<string | null>(null);
 
   useEffect(() => {
-    // Load testimonials from localStorage
-    const saved = localStorage.getItem("testimonials");
-    if (saved) {
-      setTestimonials(JSON.parse(saved));
-    } else {
-      // Default testimonials
-      const defaultTestimonials: Testimonial[] = [
-        {
-          id: "1",
-          name: "Aziz Rahimov",
-          course: "Matematika Abituriyentlar",
-          rating: 5,
-          comment: "Matematika bo'yicha juda yaxshi o'qitadilar. O'qituvchilar professional va har bir talabaga alohida e'tibor berishadi.",
-          date: new Date().toLocaleDateString(),
-        },
-        {
-          id: "2",
-          name: "Dilnoza Karimova",
-          course: "Prezident maktabiga tayyorlov",
-          rating: 5,
-          comment: "Farzandim prezident maktabiga o'qishga kirdi. Markazga katta rahmat! O'qituvchilar juda malakali.",
-          date: new Date().toLocaleDateString(),
-        },
-        {
-          id: "3",
-          name: "Bobur Tursunov",
-          course: "SAT",
-          rating: 5,
-          comment: "SAT imtihoniga a'lo tayyorladdilar. Natijam kutganimdan ham yaxshi bo'ldi. Tavsiya qilaman!",
-          date: new Date().toLocaleDateString(),
-        },
-      ];
-      setTestimonials(defaultTestimonials);
-      localStorage.setItem("testimonials", JSON.stringify(defaultTestimonials));
-    }
-  }, []);
+    if (!showForm || !turnstileSiteKey) return;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    const newTestimonial: Testimonial = {
-      id: Date.now().toString(),
-      name: formData.name,
-      course: formData.course,
-      rating: formData.rating,
-      comment: formData.comment,
-      date: new Date().toLocaleDateString(),
+    const renderWidget = () => {
+      if (!turnstileContainerRef.current || !window.turnstile) return;
+      if (turnstileWidgetIdRef.current) return;
+      turnstileWidgetIdRef.current = window.turnstile.render(
+        turnstileContainerRef.current,
+        { sitekey: turnstileSiteKey, theme: "auto" }
+      );
     };
 
-    const updated = [newTestimonial, ...testimonials];
-    setTestimonials(updated);
-    localStorage.setItem("testimonials", JSON.stringify(updated));
+    if (window.turnstile) {
+      renderWidget();
+      return;
+    }
 
-    // Reset form
+    const existing = document.getElementById("turnstile-script") as HTMLScriptElement | null;
+    if (existing) {
+      existing.addEventListener("load", renderWidget, { once: true });
+      return () => existing.removeEventListener("load", renderWidget);
+    }
+
+    const script = document.createElement("script");
+    script.id = "turnstile-script";
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    script.async = true;
+    script.defer = true;
+    script.addEventListener("load", renderWidget, { once: true });
+    document.body.appendChild(script);
+  }, [showForm, turnstileSiteKey]);
+
+  useEffect(() => {
+    if (showForm) return;
+    if (turnstileWidgetIdRef.current && window.turnstile) {
+      window.turnstile.remove(turnstileWidgetIdRef.current);
+    }
+    turnstileWidgetIdRef.current = null;
+  }, [showForm]);
+
+  useEffect(() => {
+    const loadTestimonials = async () => {
+      const { data, error } = await supabase
+        .from("testimonials")
+        .select("id, name, course, rating, comment, created_at")
+        .order("created_at", { ascending: false });
+
+      if (!error && data) {
+        setTestimonials(data as Testimonial[]);
+      }
+      setIsLoading(false);
+    };
+
+    loadTestimonials();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitError(null);
+    setSubmitSuccess(false);
+
+    const tokenInput = formRef.current?.querySelector(
+      'input[name="cf-turnstile-response"]'
+    ) as HTMLInputElement | null;
+    const token = tokenInput?.value;
+
+    if (!token) {
+      setSubmitError("CAPTCHA tasdiqlash kerak.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    const res = await fetch("/api/submit-testimonial", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: formData.name,
+        course: formData.course,
+        rating: formData.rating,
+        comment: formData.comment,
+        token,
+      }),
+    });
+
+    const payload = await res.json().catch(() => null);
+
+    if (!res.ok) {
+      setSubmitError("Xatolik: fikringizni yuborib bo'lmadi. Keyinroq urinib ko'ring.");
+      setIsSubmitting(false);
+      if (turnstileWidgetIdRef.current && window.turnstile) {
+        window.turnstile.reset(turnstileWidgetIdRef.current);
+      }
+      return;
+    }
+
+    if (payload?.data) {
+      setTestimonials((prev) => [payload.data as Testimonial, ...prev]);
+    }
+
+    setIsSubmitting(false);
+
     setFormData({
       name: "",
       course: "",
@@ -83,9 +152,8 @@ export function Testimonials() {
       comment: "",
     });
     setShowForm(false);
-
-    // Show success message
-    alert("Rahmat! Sizning fikringiz qo'shildi!");
+    setSubmitSuccess(true);
+    window.setTimeout(() => setSubmitSuccess(false), 4000);
   };
 
   return (
@@ -120,6 +188,16 @@ export function Testimonials() {
               O'z fikringizni qoldiring
             </motion.button>
           )}
+
+          {submitSuccess && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-6 inline-block bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-200 px-5 py-3 rounded-lg text-sm font-medium"
+            >
+              Rahmat! Sizning fikringiz qo'shildi.
+            </motion.div>
+          )}
         </motion.div>
 
         {/* Form */}
@@ -130,7 +208,10 @@ export function Testimonials() {
             className="max-w-2xl mx-auto mb-12 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-100 dark:border-gray-700"
           >
             <h3 className="text-2xl font-bold mb-6 dark:text-white">O'z fikringizni qoldiring</h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+              {submitError && (
+                <div className="text-sm text-red-600">{submitError}</div>
+              )}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Ismingiz
@@ -211,12 +292,21 @@ export function Testimonials() {
                 />
               </div>
 
+              {turnstileSiteKey ? (
+                <div ref={turnstileContainerRef} />
+              ) : (
+                <div className="text-sm text-red-600">
+                  CAPTCHA sozlanmagan. VITE_TURNSTILE_SITE_KEY ni .env ga qo'shing.
+                </div>
+              )}
+
               <div className="flex gap-4">
                 <motion.button
                   type="submit"
+                  disabled={isSubmitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex-1 bg-gradient-to-r from-[#32368d] to-[#ff5e2c] text-white px-8 py-4 rounded-lg font-medium shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-2"
+                  className="flex-1 bg-gradient-to-r from-[#32368d] to-[#ff5e2c] text-white px-8 py-4 rounded-lg font-medium shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-2 disabled:opacity-60"
                 >
                   <Send className="size-5" />
                   Yuborish
@@ -236,6 +326,13 @@ export function Testimonials() {
         )}
 
         {/* Testimonials Grid */}
+        {/* Empty State */}
+        {!isLoading && testimonials.length === 0 && (
+          <div className="text-center text-gray-600 dark:text-gray-300 mb-8">
+            Hozircha fikrlar yo‘q. Birinchi bo‘lib fikr qoldiring!
+          </div>
+        )}
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((testimonial, index) => (
             <motion.div
@@ -281,7 +378,7 @@ export function Testimonials() {
               </p>
 
               <p className="text-xs text-gray-500 dark:text-gray-500">
-                {testimonial.date}
+                {new Date(testimonial.created_at).toLocaleDateString()}
               </p>
             </motion.div>
           ))}
