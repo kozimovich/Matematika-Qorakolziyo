@@ -3,4 +3,18 @@ dist
 .DS_Store
 .env
 .env.*
+!.env.example
 *.log
+
+# OS / editor lock & temp files
+.~lock.*#
+*.tmp
+*.swp
+*.swo
+
+# Local snapshots / source docs (root da yotmasligi kerak)
+Screenshot*.png
+IMG_*.PNG
+IMG_*.png
+*.docx
+*.pdf
