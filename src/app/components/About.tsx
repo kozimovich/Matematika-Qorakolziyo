@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Target, Eye, Heart, Zap } from "lucide-react";
-const officeImage = "/assets/about-image.png";
+const officeImage = "/assets/about-image.jpg";
 
 export function About() {
   const values = [
@@ -31,7 +31,7 @@ export function About() {
   ];
 
   return (
-    <section id="about" className="py-24 bg-white">
+    <section id="about" className="py-24 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -84,13 +84,13 @@ export function About() {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-2xl p-6"
+              className="absolute -bottom-6 -right-6 bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-6"
             >
               <div className="text-center">
-                <div className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
+                <div className="text-4xl font-bold bg-gradient-to-r from-[#32368d] to-[#ff5e2c] bg-clip-text text-transparent">
                   14+
                 </div>
-                <div className="text-gray-600 text-sm font-medium">
+                <div className="text-gray-600 dark:text-gray-400 text-sm font-medium">
                   Yillik tajriba
                 </div>
               </div>
@@ -105,7 +105,7 @@ export function About() {
             transition={{ duration: 0.6 }}
             className="flex flex-col justify-center"
           >
-            <h3 className="text-3xl font-bold mb-6 text-gray-800">
+            <h3 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">
               Nima uchun aynan bizni tanlashingiz kerak?
             </h3>
             <div className="space-y-4 mb-8">
@@ -125,7 +125,7 @@ export function About() {
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   className="flex items-start gap-3"
                 >
-                  <div className="bg-gradient-to-br from-blue-600 to-teal-500 rounded-full p-1 mt-1">
+                  <div className="bg-gradient-to-br from-[#32368d] to-[#ff5e2c] rounded-full p-1 mt-1">
                     <svg
                       className="size-4 text-white"
                       fill="none"
@@ -140,7 +140,7 @@ export function About() {
                       />
                     </svg>
                   </div>
-                  <p className="text-gray-700">{item}</p>
+                  <p className="text-gray-700 dark:text-gray-300">{item}</p>
                 </motion.div>
               ))}
             </div>
@@ -157,17 +157,17 @@ export function About() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -5 }}
-              className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100"
+              className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-700"
             >
               <div
                 className={`bg-gradient-to-br ${value.color} p-3 rounded-lg inline-block mb-4`}
               >
                 <value.icon className="size-6 text-white" />
               </div>
-              <h4 className="font-bold text-lg mb-2 text-gray-800">
+              <h4 className="font-bold text-lg mb-2 text-gray-800 dark:text-white">
                 {value.title}
               </h4>
-              <p className="text-gray-600 text-sm">{value.description}</p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">{value.description}</p>
             </motion.div>
           ))}
         </div>

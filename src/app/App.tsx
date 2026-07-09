@@ -8,6 +8,9 @@ import { Testimonials } from "./components/Testimonials";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { AdminPanel } from "./components/AdminPanel";
+import { ScrollProgress } from "./components/ScrollProgress";
+import { BackToTop } from "./components/BackToTop";
+import { LocationsMarquee } from "./components/LocationsMarquee";
 import { useEffect, useState } from "react";
 
 type ThemeMode = "light" | "dark" | "system";
@@ -82,9 +85,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
+      <ScrollProgress />
       <Header theme={theme} isDark={isDark} onToggleTheme={cycleTheme} />
       <main>
         <Hero />
+        <LocationsMarquee />
         <About />
         <Courses />
         <Teachers />
@@ -93,6 +98,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <BackToTop />
     </div>
   );
 }

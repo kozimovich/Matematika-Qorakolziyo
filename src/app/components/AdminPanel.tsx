@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
-import { LogOut, Trash2, RefreshCcw } from "lucide-react";
+import { LogOut, Trash2, RefreshCcw, Check } from "lucide-react";
 
 interface Testimonial {
   id: string;
@@ -8,6 +8,7 @@ interface Testimonial {
   course: string;
   rating: number;
   comment: string;
+  approved: boolean;
   created_at: string;
 }
 
@@ -15,7 +16,9 @@ export function AdminPanel() {
   const [sessionReady, setSessionReady] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState<string | null>(null);
+  const [isApproving, setIsApproving] = useState<string | null>(null);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [filter, setFilter] = useState<"pending" | "approved" | "all">("pending");
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [email, setEmail] = useState("");
@@ -45,7 +48,7 @@ export function AdminPanel() {
     setError(null);
     const { data, error: fetchError } = await supabase
       .from("testimonials")
-      .select("id, name, course, rating, comment, created_at")
+      .select("id, name, course, rating, comment, approved, created_at")
       .order("created_at", { ascending: false });
 
     if (fetchError) {
@@ -81,6 +84,24 @@ export function AdminPanel() {
     await supabase.auth.signOut();
   };
 
+  const handleApprove = async (id: string) => {
+    setIsApproving(id);
+    const { error: updateError } = await supabase
+      .from("testimonials")
+      .update({ approved: true })
+      .eq("id", id);
+
+    if (updateError) {
+      setError("Tasdiqlashda xatolik bo'ldi.");
+    } else {
+      setTestimonials((prev) =>
+        prev.map((item) => (item.id === id ? { ...item, approved: true } : item))
+      );
+    }
+
+    setIsApproving(null);
+  };
+
   const handleDelete = async (id: string) => {
     const confirmed = window.confirm("Haqiqatan ham ushbu fikrni o'chirmoqchimisiz?");
     if (!confirmed) return;
@@ -101,14 +122,22 @@ export function AdminPanel() {
   };
 
   const normalizedSearch = searchTerm.trim().toLowerCase();
+  const byStatus =
+    filter === "all"
+      ? testimonials
+      : testimonials.filter((item) =>
+          filter === "approved" ? item.approved : !item.approved
+        );
   const filteredTestimonials = normalizedSearch
-    ? testimonials.filter((item) =>
+    ? byStatus.filter((item) =>
         [item.name, item.course, item.comment]
           .join(" ")
           .toLowerCase()
           .includes(normalizedSearch)
       )
-    : testimonials;
+    : byStatus;
+
+  const pendingCount = testimonials.filter((item) => !item.approved).length;
 
   if (!sessionReady) {
     return (
@@ -191,6 +220,27 @@ export function AdminPanel() {
           </div>
         ) : (
           <div className="bg-white rounded-2xl shadow-xl p-6 border border-gray-100">
+            <div className="flex flex-wrap gap-2 mb-6">
+              {(
+                [
+                  { key: "pending", label: `Kutilmoqda (${pendingCount})` },
+                  { key: "approved", label: "Tasdiqlangan" },
+                  { key: "all", label: "Hammasi" },
+                ] as const
+              ).map((tab) => (
+                <button
+                  key={tab.key}
+                  onClick={() => setFilter(tab.key)}
+                  className={`rounded-lg px-4 py-2 text-sm border transition-colors ${
+                    filter === tab.key
+                      ? "bg-blue-600 text-white border-blue-600"
+                      : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
             {error && <p className="text-sm text-red-600 mb-4">{error}</p>}
             {isLoading ? (
               <p className="text-gray-600">Yuklanmoqda...</p>
@@ -202,7 +252,18 @@ export function AdminPanel() {
                   <div key={item.id} className="border border-gray-200 rounded-xl p-4">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                       <div>
-                        <p className="font-semibold">{item.name}</p>
+                        <div className="flex items-center gap-2">
+                          <p className="font-semibold">{item.name}</p>
+                          {item.approved ? (
+                            <span className="text-xs bg-green-100 text-green-700 rounded-full px-2 py-0.5">
+                              Tasdiqlangan
+                            </span>
+                          ) : (
+                            <span className="text-xs bg-amber-100 text-amber-700 rounded-full px-2 py-0.5">
+                              Kutilmoqda
+                            </span>
+                          )}
+                        </div>
                         <p className="text-sm text-gray-500">{item.course}</p>
                       </div>
                       <div className="text-sm text-gray-500">
@@ -212,14 +273,26 @@ export function AdminPanel() {
                     <p className="text-sm text-gray-700 mt-3">{item.comment}</p>
                     <div className="flex items-center justify-between mt-4">
                       <div className="text-sm text-gray-600">Baho: {item.rating}/5</div>
-                      <button
-                        onClick={() => handleDelete(item.id)}
-                        disabled={isDeleting === item.id}
-                        className="inline-flex items-center gap-2 rounded-lg border border-red-200 text-red-600 px-3 py-2 text-sm hover:bg-red-50 disabled:opacity-60"
-                      >
-                        <Trash2 className="size-4" />
-                        O'chirish
-                      </button>
+                      <div className="flex items-center gap-2">
+                        {!item.approved && (
+                          <button
+                            onClick={() => handleApprove(item.id)}
+                            disabled={isApproving === item.id}
+                            className="inline-flex items-center gap-2 rounded-lg bg-green-600 text-white px-3 py-2 text-sm hover:bg-green-700 disabled:opacity-60"
+                          >
+                            <Check className="size-4" />
+                            Tasdiqlash
+                          </button>
+                        )}
+                        <button
+                          onClick={() => handleDelete(item.id)}
+                          disabled={isDeleting === item.id}
+                          className="inline-flex items-center gap-2 rounded-lg border border-red-200 text-red-600 px-3 py-2 text-sm hover:bg-red-50 disabled:opacity-60"
+                        >
+                          <Trash2 className="size-4" />
+                          O'chirish
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}

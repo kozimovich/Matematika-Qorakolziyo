@@ -119,7 +119,7 @@ export function Courses() {
   ];
 
   return (
-    <section id="courses" className="py-24 bg-gradient-to-br from-gray-50 to-white">
+    <section id="courses" className="py-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -188,7 +188,7 @@ export function Courses() {
                           />
                         </svg>
                       </div>
-                      <span className="text-sm text-gray-700">{feature}</span>
+                      <span className="text-sm text-gray-700 dark:text-gray-300">{feature}</span>
                     </div>
                   ))}
                 </div>

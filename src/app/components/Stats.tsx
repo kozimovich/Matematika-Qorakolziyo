@@ -64,7 +64,7 @@ export function Stats() {
   ];
 
   return (
-    <section id="stats" className="py-24 bg-gradient-to-br from-blue-600 via-teal-500 to-blue-600 relative overflow-hidden">
+    <section id="stats" className="py-24 bg-gradient-to-br from-[#32368d] via-[#3d43a8] to-[#ff5e2c] relative overflow-hidden">
       {/* Animated background patterns */}
       <div className="absolute inset-0 opacity-10">
         <motion.div
@@ -114,7 +114,7 @@ export function Stats() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -10, scale: 1.05 }}
-              className="bg-white rounded-xl shadow-2xl p-8 text-center relative overflow-hidden group"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-8 text-center relative overflow-hidden group"
             >
               {/* Animated gradient background on hover */}
               <div
@@ -144,7 +144,7 @@ export function Stats() {
               </div>
 
               {/* Label */}
-              <p className="text-gray-600 font-medium">{stat.label}</p>
+              <p className="text-gray-600 dark:text-gray-300 font-medium">{stat.label}</p>
 
               {/* Decorative element */}
               <motion.div
@@ -181,7 +181,7 @@ export function Stats() {
             href="https://qorakol-ziyo.tilda.ws/math-form"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-white text-blue-600 px-8 py-4 rounded-lg font-medium shadow-xl hover:shadow-2xl transition-shadow cursor-pointer"
+            className="bg-white text-[#32368d] px-8 py-4 rounded-lg font-medium shadow-xl hover:shadow-2xl transition-shadow cursor-pointer"
           >
             Hoziroq boshlash
           </motion.a>

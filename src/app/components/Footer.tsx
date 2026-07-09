@@ -154,9 +154,8 @@ export function Footer() {
               © {year} Qorako'l Ziyo O'quv Markazi. Barcha huquqlar himoyalangan.
             </p>
             <div className="flex items-center gap-2 text-gray-400 text-sm">
-              <span>Ishlab chiqildi</span>
               <Heart className="size-4 fill-red-500 text-red-500 animate-pulse" />
-              <span>bilan</span>
+              <span>bilan Toshkentda ishlab chiqildi</span>
             </div>
           </div>
         </div>
@@ -167,7 +166,7 @@ export function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-12 bg-gradient-to-r from-blue-600 to-teal-500 rounded-2xl p-8 text-center"
+          className="mt-12 bg-gradient-to-r from-[#32368d] to-[#ff5e2c] rounded-2xl p-8 text-center"
         >
           <h3 className="text-2xl md:text-3xl font-bold mb-4">
             Kelajagingizni bugun boshlang!
@@ -181,7 +180,7 @@ export function Footer() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href="tel:+998785558555"
-              className="bg-white text-blue-600 px-8 py-4 rounded-lg font-medium shadow-xl hover:shadow-2xl transition-shadow inline-flex items-center gap-2"
+              className="bg-white text-[#32368d] px-8 py-4 rounded-lg font-medium shadow-xl hover:shadow-2xl transition-shadow inline-flex items-center gap-2"
             >
               <Phone className="size-5" />
               Qo'ng'iroq qiling

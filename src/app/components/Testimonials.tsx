@@ -128,7 +128,7 @@ export function Testimonials() {
       }),
     });
 
-    const payload = await res.json().catch(() => null);
+    await res.json().catch(() => null);
 
     if (!res.ok) {
       setSubmitError("Xatolik: fikringizni yuborib bo'lmadi. Keyinroq urinib ko'ring.");
@@ -139,10 +139,7 @@ export function Testimonials() {
       return;
     }
 
-    if (payload?.data) {
-      setTestimonials((prev) => [payload.data as Testimonial, ...prev]);
-    }
-
+    // Fikr moderatsiyadan o'tgach saytda ko'rinadi — ro'yxatga darhol qo'shilmaydi
     setIsSubmitting(false);
 
     setFormData({
@@ -153,7 +150,14 @@ export function Testimonials() {
     });
     setShowForm(false);
     setSubmitSuccess(true);
-    window.setTimeout(() => setSubmitSuccess(false), 4000);
+    window.setTimeout(() => setSubmitSuccess(false), 6000);
+  };
+
+  const formatDate = (value: string) => {
+    const d = new Date(value);
+    const dd = String(d.getDate()).padStart(2, "0");
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    return `${dd}.${mm}.${d.getFullYear()}`;
   };
 
   return (
@@ -195,7 +199,7 @@ export function Testimonials() {
               animate={{ opacity: 1, y: 0 }}
               className="mt-6 inline-block bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-200 px-5 py-3 rounded-lg text-sm font-medium"
             >
-              Rahmat! Sizning fikringiz qo'shildi.
+              Rahmat! Fikringiz qabul qilindi — tekshiruvdan so'ng saytda ko'rinadi.
             </motion.div>
           )}
         </motion.div>
@@ -378,7 +382,7 @@ export function Testimonials() {
               </p>
 
               <p className="text-xs text-gray-500 dark:text-gray-500">
-                {new Date(testimonial.created_at).toLocaleDateString()}
+                {formatDate(testimonial.created_at)}
               </p>
             </motion.div>
           ))}

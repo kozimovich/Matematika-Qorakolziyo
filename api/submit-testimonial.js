@@ -115,6 +115,8 @@ export default async function handler(req, res) {
       course: course.trim(),
       rating: ratingNum,
       comment: comment.trim(),
+      // Moderatsiya: fikr admin tasdig'idan keyingina saytda ko'rinadi
+      approved: false,
     })
     .select("id, name, course, rating, comment, created_at")
     .single();

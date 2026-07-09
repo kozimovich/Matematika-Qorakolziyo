@@ -1,6 +1,15 @@
 import { motion } from "motion/react";
 import { GraduationCap, Award, Users, BookOpen } from "lucide-react";
-const buildingImage = "/assets/hero-image.png";
+const buildingImage = "/assets/hero-image.jpg";
+
+const mathSymbols = [
+  { char: "∑", style: { top: "14%", left: "4%" }, size: "text-6xl", duration: 7, delay: 0 },
+  { char: "π", style: { top: "68%", left: "3%" }, size: "text-7xl", duration: 9, delay: 1.2 },
+  { char: "√x", style: { top: "22%", right: "6%" }, size: "text-5xl", duration: 8, delay: 0.6 },
+  { char: "∞", style: { bottom: "14%", right: "4%" }, size: "text-6xl", duration: 10, delay: 2 },
+  { char: "ƒ(x)", style: { top: "48%", left: "44%" }, size: "text-4xl", duration: 11, delay: 1.6 },
+  { char: "÷", style: { bottom: "30%", left: "12%" }, size: "text-5xl", duration: 8, delay: 2.4 },
+];
 
 export function Hero() {
   const features = [
@@ -38,6 +47,25 @@ export function Hero() {
         className="absolute bottom-0 left-0 w-96 h-96 bg-teal-200 dark:bg-teal-900 rounded-full opacity-20 blur-3xl"
       />
 
+      {/* Suzuvchi matematik belgilar */}
+      {mathSymbols.map((symbol, index) => (
+        <motion.span
+          key={index}
+          animate={{ y: [0, -22, 0], rotate: [0, 6, -6, 0] }}
+          transition={{
+            duration: symbol.duration,
+            delay: symbol.delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          style={symbol.style}
+          className={`absolute ${symbol.size} font-bold text-[#32368d]/10 dark:text-white/10 select-none pointer-events-none`}
+          aria-hidden="true"
+        >
+          {symbol.char}
+        </motion.span>
+      ))}
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
@@ -48,7 +76,7 @@ export function Hero() {
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <span className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                🎓 O'zbekistondagi eng yirik Matematika o'quv markazi
+                🎓 O'zbekistondagi eng katta Matematika o'quv markazi
               </span>
             </motion.div>
 
@@ -152,18 +180,18 @@ export function Hero() {
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="absolute top-0 left-0 right-0 bg-white rounded-2xl shadow-2xl p-8 z-10"
+                className="absolute top-0 left-0 right-0 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 z-10"
               >
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="bg-gradient-to-br from-blue-600 to-teal-500 p-3 rounded-xl">
+                  <div className="bg-gradient-to-br from-[#32368d] to-[#ff5e2c] p-3 rounded-xl">
                     <GraduationCap className="size-8 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-xl">24000+</h3>
-                    <p className="text-gray-600 text-sm">Bitiruvchilar</p>
+                    <h3 className="font-bold text-xl dark:text-white">24000+</h3>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">Bitiruvchilar</p>
                   </div>
                 </div>
-                <div className="bg-gradient-to-br from-blue-50 to-teal-50 rounded-xl p-6">
+                <div className="bg-gradient-to-br from-blue-50 to-orange-50 dark:from-gray-700 dark:to-gray-700 rounded-xl p-6">
                   <img
                     src={buildingImage}
                     alt="Qorako'l Ziyo Building"
@@ -183,10 +211,10 @@ export function Hero() {
                   ease: "easeInOut",
                   delay: 0.5,
                 }}
-                className="absolute bottom-0 right-0 left-12 bg-gradient-to-br from-blue-600 to-teal-500 rounded-2xl shadow-2xl p-8 text-white"
+                className="absolute bottom-0 right-0 left-12 bg-gradient-to-br from-[#32368d] to-[#ff5e2c] rounded-2xl shadow-2xl p-8 text-white"
               >
                 <h3 className="font-bold text-2xl mb-2">98%</h3>
-                <p className="text-blue-100 mb-4">Talabalar mamnuniyati</p>
+                <p className="text-white/80 mb-4">Talabalar mamnuniyati</p>
                 <div className="flex gap-1">
                   {[...Array(5)].map((_, i) => (
                     <span key={i} className="text-2xl">⭐</span>

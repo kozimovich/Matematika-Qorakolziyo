@@ -167,9 +167,9 @@ export function Teachers() {
                       {teacher.name.charAt(0)}
                     </span>
                   </div>
-                  <div className="bg-yellow-50 rounded-lg px-3 py-1 flex items-center gap-1">
+                  <div className="bg-yellow-50 dark:bg-yellow-900/30 rounded-lg px-3 py-1 flex items-center gap-1">
                     <Star className="size-4 fill-yellow-400 text-yellow-400" />
-                    <span className="font-bold text-gray-800">5.0</span>
+                    <span className="font-bold text-gray-800 dark:text-yellow-200">5.0</span>
                   </div>
                 </div>
 
@@ -179,7 +179,7 @@ export function Teachers() {
                 <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">{teacher.experience}</p>
 
                 {teacher.achievements.length > 0 && (
-                  <div className="mb-4 pb-4 border-b border-gray-100">
+                  <div className="mb-4 pb-4 border-b border-gray-100 dark:border-gray-700">
                     <div className="flex items-center gap-2 mb-2">
                       <Award className="size-4 text-blue-600" />
                       <p className="font-semibold text-sm text-gray-800 dark:text-gray-300">
