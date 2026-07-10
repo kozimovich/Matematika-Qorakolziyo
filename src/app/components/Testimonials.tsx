@@ -160,44 +160,41 @@ export function Testimonials() {
     return `${dd}.${mm}.${d.getFullYear()}`;
   };
 
+  const inputClasses =
+    "w-full px-4 py-3 rounded-xl bg-[#f5f5f7] dark:bg-[#1d1d1f] text-gray-900 dark:text-white placeholder:text-gray-400 border border-transparent focus:border-[#32368d] focus:ring-2 focus:ring-[#32368d]/20 outline-none transition-all";
+
   return (
-    <section id="testimonials" className="py-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="testimonials" className="py-24 bg-white dark:bg-black transition-colors">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.7 }}
+          className="text-center mb-14"
         >
-          <span className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-4">
-            Talabalar fikrlari
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 dark:text-white">
-            <span className="bg-gradient-to-r from-[#32368d] to-[#ff5e2c] bg-clip-text text-transparent">
-              Bizni Tanlagan Talabalar
-            </span>
+          <p className="text-[#ff5e2c] font-semibold mb-3">Talabalar fikrlari</p>
+          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900 dark:text-white mb-5">
+            Bizni tanlagan talabalar
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
+          <p className="text-xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto mb-8">
             Minglab talabalar hayotini o'zgartirdi. Ularning fikrlari
           </p>
-          
+
           {!showForm && (
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <button
               onClick={() => setShowForm(true)}
-              className="bg-gradient-to-r from-[#32368d] to-[#ff5e2c] text-white px-8 py-4 rounded-lg font-medium shadow-lg hover:shadow-xl transition-shadow"
+              className="bg-[#32368d] text-white px-7 py-3 rounded-full text-[17px] font-medium hover:opacity-90 transition-opacity"
             >
               O'z fikringizni qoldiring
-            </motion.button>
+            </button>
           )}
 
           {submitSuccess && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-6 inline-block bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-200 px-5 py-3 rounded-lg text-sm font-medium"
+              className="mt-6 inline-block bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 px-5 py-3 rounded-full text-sm font-medium"
             >
               Rahmat! Fikringiz qabul qilindi — tekshiruvdan so'ng saytda ko'rinadi.
             </motion.div>
@@ -209,10 +206,12 @@ export function Testimonials() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="max-w-2xl mx-auto mb-12 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-100 dark:border-gray-700"
+            className="max-w-2xl mx-auto mb-14 bg-white dark:bg-[#161617] rounded-3xl shadow-lg p-8 border border-black/5 dark:border-white/10"
           >
-            <h3 className="text-2xl font-bold mb-6 dark:text-white">O'z fikringizni qoldiring</h3>
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+            <h3 className="text-2xl font-semibold tracking-tight mb-6 text-gray-900 dark:text-white">
+              O'z fikringizni qoldiring
+            </h3>
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
               {submitError && (
                 <div className="text-sm text-red-600">{submitError}</div>
               )}
@@ -227,7 +226,7 @@ export function Testimonials() {
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                  className={inputClasses}
                   placeholder="To'liq ismingizni kiriting"
                 />
               </div>
@@ -242,7 +241,7 @@ export function Testimonials() {
                   onChange={(e) =>
                     setFormData({ ...formData, course: e.target.value })
                   }
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                  className={inputClasses}
                 >
                   <option value="">Tanlang</option>
                   <option value="Matematika Abituriyentlar">Matematika Abituriyentlar</option>
@@ -269,10 +268,10 @@ export function Testimonials() {
                       className="focus:outline-none"
                     >
                       <Star
-                        className={`size-8 ${
+                        className={`size-8 transition-colors ${
                           star <= formData.rating
                             ? "fill-yellow-400 text-yellow-400"
-                            : "text-gray-300"
+                            : "text-gray-300 dark:text-gray-600"
                         }`}
                       />
                     </button>
@@ -291,7 +290,7 @@ export function Testimonials() {
                     setFormData({ ...formData, comment: e.target.value })
                   }
                   rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
+                  className={`${inputClasses} resize-none`}
                   placeholder="O'quv markazi haqida fikringizni yozing..."
                 />
               </div>
@@ -304,61 +303,57 @@ export function Testimonials() {
                 </div>
               )}
 
-              <div className="flex gap-4">
-                <motion.button
+              <div className="flex gap-3">
+                <button
                   type="submit"
                   disabled={isSubmitting}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="flex-1 bg-gradient-to-r from-[#32368d] to-[#ff5e2c] text-white px-8 py-4 rounded-lg font-medium shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-2 disabled:opacity-60"
+                  className="flex-1 bg-[#32368d] text-white px-7 py-3 rounded-full text-[17px] font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-50"
                 >
-                  <Send className="size-5" />
+                  <Send className="size-4" />
                   Yuborish
-                </motion.button>
-                <motion.button
+                </button>
+                <button
                   type="button"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
                   onClick={() => setShowForm(false)}
-                  className="px-6 py-4 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  className="px-6 py-3 rounded-full text-[17px] text-gray-700 dark:text-gray-300 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/15 transition-colors"
                 >
                   Bekor qilish
-                </motion.button>
+                </button>
               </div>
             </form>
           </motion.div>
         )}
 
-        {/* Testimonials Grid */}
         {/* Empty State */}
         {!isLoading && testimonials.length === 0 && (
-          <div className="text-center text-gray-600 dark:text-gray-300 mb-8">
-            Hozircha fikrlar yo‘q. Birinchi bo‘lib fikr qoldiring!
+          <div className="text-center text-gray-500 dark:text-gray-400 mb-8">
+            Hozircha fikrlar yo'q. Birinchi bo'lib fikr qoldiring!
           </div>
         )}
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Testimonials Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all p-6 border border-gray-100 dark:border-gray-700"
+              transition={{ duration: 0.5, delay: (index % 3) * 0.08 }}
+              whileHover={{ y: -4 }}
+              className="bg-[#f5f5f7] dark:bg-[#1d1d1f] rounded-3xl p-6 transition-shadow hover:shadow-lg"
             >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="bg-gradient-to-br from-[#32368d] to-[#ff5e2c] size-12 rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-xl font-bold text-white">
+              <div className="flex items-center gap-3.5 mb-4">
+                <div className="flex size-11 items-center justify-center rounded-full bg-[#32368d]">
+                  <span className="text-lg font-semibold text-white">
                     {testimonial.name.charAt(0)}
                   </span>
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-800 dark:text-white">
+                  <h4 className="font-semibold tracking-tight text-gray-900 dark:text-white">
                     {testimonial.name}
                   </h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
                     {testimonial.course}
                   </p>
                 </div>
@@ -371,7 +366,7 @@ export function Testimonials() {
                     className={`size-4 ${
                       i < testimonial.rating
                         ? "fill-yellow-400 text-yellow-400"
-                        : "text-gray-300"
+                        : "text-gray-300 dark:text-gray-600"
                     }`}
                   />
                 ))}
@@ -381,7 +376,7 @@ export function Testimonials() {
                 "{testimonial.comment}"
               </p>
 
-              <p className="text-xs text-gray-500 dark:text-gray-500">
+              <p className="text-xs text-gray-400 dark:text-gray-500">
                 {formatDate(testimonial.created_at)}
               </p>
             </motion.div>

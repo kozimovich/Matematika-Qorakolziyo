@@ -1,5 +1,4 @@
 import { motion } from "motion/react";
-import { Users, GraduationCap, Award, TrendingUp } from "lucide-react";
 import { useEffect, useState } from "react";
 
 function AnimatedNumber({ end, duration = 2000 }: { end: number; duration?: number }) {
@@ -13,7 +12,7 @@ function AnimatedNumber({ end, duration = 2000 }: { end: number; duration?: numb
       if (!startTime) startTime = timestamp;
       const progress = timestamp - startTime;
       const percentage = Math.min(progress / duration, 1);
-      
+
       setCount(Math.floor(end * percentage));
 
       if (percentage < 1) {
@@ -33,130 +32,46 @@ export function Stats() {
   const [isVisible, setIsVisible] = useState(false);
 
   const stats = [
-    {
-      icon: Users,
-      value: 24000,
-      suffix: "+",
-      label: "Bitiruvchilar",
-      color: "from-blue-500 to-blue-600",
-    },
-    {
-      icon: GraduationCap,
-      value: 98,
-      suffix: "%",
-      label: "Muvaffaqiyat darajasi",
-      color: "from-teal-500 to-teal-600",
-    },
-    {
-      icon: Award,
-      value: 700,
-      suffix: "+",
-      label: "Yutuqlar va mukofotlar",
-      color: "from-purple-500 to-purple-600",
-    },
-    {
-      icon: TrendingUp,
-      value: 95,
-      suffix: "%",
-      label: "Talabalar mamnuniyati",
-      color: "from-orange-500 to-orange-600",
-    },
+    { value: 24000, suffix: "+", label: "Bitiruvchilar" },
+    { value: 98, suffix: "%", label: "Muvaffaqiyat darajasi" },
+    { value: 700, suffix: "+", label: "Yutuqlar va mukofotlar" },
+    { value: 95, suffix: "%", label: "Talabalar mamnuniyati" },
   ];
 
   return (
-    <section id="stats" className="py-24 bg-gradient-to-br from-[#32368d] via-[#3d43a8] to-[#ff5e2c] relative overflow-hidden">
-      {/* Animated background patterns */}
-      <div className="absolute inset-0 opacity-10">
-        <motion.div
-          animate={{
-            backgroundPosition: ["0% 0%", "100% 100%"],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 20% 50%, white 2px, transparent 2px),
-                             radial-gradient(circle at 80% 80%, white 2px, transparent 2px)`,
-            backgroundSize: "50px 50px",
-          }}
-        />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="stats" className="py-28 bg-black relative overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           onViewportEnter={() => setIsVisible(true)}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.7 }}
+          className="text-center mb-20"
         >
-          <span className="inline-block bg-white/20 text-white px-4 py-2 rounded-full text-sm font-medium mb-4">
-            Bizning Natijalar
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-            Raqamlarda ko'rsatkich
+          <p className="text-[#ff5e2c] font-semibold mb-3">Bizning natijalar</p>
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-tight text-white mb-5">
+            Raqamlar o'zi gapiradi.
           </h2>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             14 yillik faoliyatimiz davomida erishgan yutuqlarimiz
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 md:gap-6 text-center">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -10, scale: 1.05 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-8 text-center relative overflow-hidden group"
+              transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              {/* Animated gradient background on hover */}
-              <div
-                className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
-              />
-
-              {/* Icon */}
-              <motion.div
-                animate={isVisible ? {
-                  rotate: [0, 360],
-                } : {}}
-                transition={{
-                  duration: 2,
-                  delay: index * 0.2,
-                }}
-                className={`bg-gradient-to-br ${stat.color} size-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg`}
-              >
-                <stat.icon className="size-8 text-white" />
-              </motion.div>
-
-              {/* Number */}
-              <div className="mb-2">
-                <span className={`text-5xl font-bold bg-gradient-to-br ${stat.color} bg-clip-text text-transparent`}>
-                  {isVisible && <AnimatedNumber end={stat.value} />}
-                  {stat.suffix}
-                </span>
+              <div className="text-5xl md:text-6xl font-semibold tracking-tight bg-gradient-to-r from-[#8f94e8] to-[#ff5e2c] bg-clip-text text-transparent mb-3">
+                {isVisible && <AnimatedNumber end={stat.value} />}
+                {stat.suffix}
               </div>
-
-              {/* Label */}
-              <p className="text-gray-600 dark:text-gray-300 font-medium">{stat.label}</p>
-
-              {/* Decorative element */}
-              <motion.div
-                animate={{
-                  width: ["0%", "100%"],
-                }}
-                transition={{
-                  duration: 1,
-                  delay: index * 0.1 + 0.5,
-                }}
-                className={`h-1 bg-gradient-to-r ${stat.color} rounded-full mt-4`}
-              />
+              <p className="text-gray-400 text-[15px]">{stat.label}</p>
             </motion.div>
           ))}
         </div>
@@ -166,25 +81,23 @@ export function Stats() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-16 bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-20 text-center"
         >
-          <h3 className="text-2xl font-bold text-white mb-4">
+          <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-white mb-3">
             Har yili 2000+ yangi talabalar bizga ishonishadi
           </h3>
-          <p className="text-white/90 text-lg mb-6">
+          <p className="text-gray-400 text-lg mb-8">
             Siz ham muvaffaqiyatli o'quvchilar qatoriga qo'shiling
           </p>
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <a
             href="https://qorakol-ziyo.tilda.ws/math-form"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-white text-[#32368d] px-8 py-4 rounded-lg font-medium shadow-xl hover:shadow-2xl transition-shadow cursor-pointer"
+            className="inline-block bg-white text-black px-7 py-3 rounded-full text-[17px] font-medium hover:opacity-90 transition-opacity"
           >
             Hoziroq boshlash
-          </motion.a>
+          </a>
         </motion.div>
       </div>
     </section>

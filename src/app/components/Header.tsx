@@ -31,77 +31,66 @@ export function Header({ theme, isDark, onToggleTheme }: HeaderProps) {
 
   return (
     <motion.header
-      initial={{ y: -100 }}
+      initial={{ y: -60 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-sm transition-colors"
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="fixed top-0 left-0 right-0 z-50 bg-white/70 dark:bg-black/60 backdrop-blur-xl border-b border-black/10 dark:border-white/10 transition-colors"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="flex justify-between items-center h-14">
           {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-3 cursor-pointer"
+          <div
+            className="flex items-center gap-2.5 cursor-pointer select-none"
             onClick={() => scrollToSection("hero")}
           >
-            <img src={logo} alt="Qorako'l Ziyo Logo" className="size-14" />
-            <div>
-              <h1 className="font-bold text-xl bg-gradient-to-r from-[#32368d] to-[#ff5e2c] bg-clip-text text-transparent">
-                Qorako'l Ziyo
-              </h1>
-              <p className="text-xs text-gray-600 dark:text-gray-400">Since 2012 | O'quv Markazi</p>
-            </div>
-          </motion.div>
+            <img src={logo} alt="Qorako'l Ziyo Logo" className="size-8" />
+            <span className="font-semibold text-[17px] tracking-tight text-gray-900 dark:text-white">
+              Qorako'l Ziyo
+            </span>
+          </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-7">
             {menuItems.map((item) => (
-              <motion.button
+              <button
                 key={item.id}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
                 onClick={() => scrollToSection(item.id)}
-                className="text-gray-700 dark:text-gray-300 hover:text-[#32368d] dark:hover:text-[#ff5e2c] transition-colors font-medium"
+                className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
               >
                 {item.name}
-              </motion.button>
+              </button>
             ))}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <button
               onClick={onToggleTheme}
               aria-label="Mavzu rejimini o'zgartirish"
-              className="inline-flex items-center gap-2 rounded-lg border border-gray-200 dark:border-gray-700 px-3 py-2 text-gray-700 dark:text-gray-200 hover:text-[#32368d] dark:hover:text-[#ff5e2c] transition-colors"
+              className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
             >
               {theme === "system" ? (
-                <Monitor className="size-5" />
+                <Monitor className="size-4" />
               ) : isDark ? (
-                <Moon className="size-5" />
+                <Moon className="size-4" />
               ) : (
-                <Sun className="size-5" />
+                <Sun className="size-4" />
               )}
-              <span className="text-sm hidden lg:inline">
-                {theme === "system" ? "Avto" : isDark ? "Tungi" : "Yorug'"}
-              </span>
-            </motion.button>
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            </button>
+            <a
               href="tel:+998785558555"
-              className="bg-gradient-to-r from-[#32368d] to-[#ff5e2c] text-white px-6 py-2.5 rounded-lg font-medium shadow-lg hover:shadow-xl transition-shadow"
+              className="text-sm font-medium bg-[#32368d] text-white px-4 py-1.5 rounded-full hover:opacity-90 transition-opacity"
             >
               Qo'ng'iroq qiling
-            </motion.a>
+            </a>
           </nav>
 
           {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Menyu"
           >
             {isMenuOpen ? (
-              <X className="size-6 text-gray-700 dark:text-gray-300" />
+              <X className="size-5 text-gray-700 dark:text-gray-300" />
             ) : (
-              <Menu className="size-6 text-gray-700 dark:text-gray-300" />
+              <Menu className="size-5 text-gray-700 dark:text-gray-300" />
             )}
           </button>
         </div>
@@ -119,22 +108,22 @@ export function Header({ theme, isDark, onToggleTheme }: HeaderProps) {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="block w-full text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-[#32368d] dark:hover:text-[#ff5e2c] transition-colors"
+                  className="block w-full text-left px-2 py-3 text-[17px] text-gray-800 dark:text-gray-200 border-b border-black/5 dark:border-white/10"
                 >
                   {item.name}
                 </button>
               ))}
               <button
                 onClick={onToggleTheme}
-                className="block w-full text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-[#32368d] dark:hover:text-[#ff5e2c] transition-colors mt-2"
+                className="block w-full text-left px-2 py-3 text-[17px] text-gray-800 dark:text-gray-200"
               >
                 <span className="inline-flex items-center gap-2">
                   {theme === "system" ? (
-                    <Monitor className="size-5" />
+                    <Monitor className="size-4" />
                   ) : isDark ? (
-                    <Moon className="size-5" />
+                    <Moon className="size-4" />
                   ) : (
-                    <Sun className="size-5" />
+                    <Sun className="size-4" />
                   )}
                   <span>
                     {theme === "system"
@@ -147,7 +136,7 @@ export function Header({ theme, isDark, onToggleTheme }: HeaderProps) {
               </button>
               <a
                 href="tel:+998785558555"
-                className="block w-full text-center bg-gradient-to-r from-[#32368d] to-[#ff5e2c] text-white px-6 py-3 rounded-lg font-medium mt-4"
+                className="block w-full text-center bg-[#32368d] text-white px-6 py-3 rounded-full font-medium mt-3"
               >
                 Qo'ng'iroq qiling
               </a>

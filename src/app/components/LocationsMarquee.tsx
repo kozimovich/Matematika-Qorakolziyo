@@ -15,20 +15,20 @@ export function LocationsMarquee() {
   const row = [...locations, ...locations, ...locations];
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-r from-[#32368d] to-[#ff5e2c] py-4">
+    <div className="relative overflow-hidden bg-[#1d1d1f] py-3.5 border-y border-white/10">
       <motion.div
         className="flex w-max items-center gap-14 whitespace-nowrap"
         animate={{ x: ["0%", "-33.3333%"] }}
-        transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
       >
         {row.map((loc, i) => (
           <span
             key={i}
-            className="flex items-center gap-2 text-white font-medium tracking-wide"
+            className="flex items-center gap-2 text-gray-300 text-sm font-medium tracking-wide"
           >
-            <MapPin className="size-4 opacity-80" />
+            <MapPin className="size-3.5 text-[#ff5e2c]" />
             {loc} filiali
-            <span className="ml-10 text-white/50 select-none">✦</span>
+            <span className="ml-10 text-white/20 select-none">·</span>
           </span>
         ))}
       </motion.div>

@@ -23,7 +23,7 @@ export function BackToTop() {
           whileTap={{ scale: 0.9 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="Yuqoriga qaytish"
-          className="fixed bottom-6 right-6 z-50 size-12 rounded-full bg-gradient-to-br from-[#32368d] to-[#ff5e2c] text-white shadow-lg shadow-[#32368d]/40 flex items-center justify-center"
+          className="fixed bottom-6 right-6 z-50 size-11 rounded-full bg-white/70 dark:bg-black/50 backdrop-blur-xl border border-black/10 dark:border-white/15 text-gray-900 dark:text-white shadow-lg flex items-center justify-center"
         >
           <ArrowUp className="size-5" />
         </motion.button>

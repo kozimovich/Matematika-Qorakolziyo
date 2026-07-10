@@ -1,1 +1,7 @@
-/* Custom fonts can be imported here if needed */
+/* Apple uslubidagi system font stack — Apple qurilmalarda SF Pro, qolganlarda eng yaqin muqobil */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}

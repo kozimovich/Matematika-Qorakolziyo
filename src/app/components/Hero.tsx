@@ -1,14 +1,14 @@
 import { motion } from "motion/react";
-import { GraduationCap, Award, Users, BookOpen } from "lucide-react";
+import { GraduationCap, Award, Users, BookOpen, ChevronRight } from "lucide-react";
 const buildingImage = "/assets/hero-image.jpg";
 
 const mathSymbols = [
-  { char: "∑", style: { top: "14%", left: "4%" }, size: "text-6xl", duration: 7, delay: 0 },
-  { char: "π", style: { top: "68%", left: "3%" }, size: "text-7xl", duration: 9, delay: 1.2 },
-  { char: "√x", style: { top: "22%", right: "6%" }, size: "text-5xl", duration: 8, delay: 0.6 },
-  { char: "∞", style: { bottom: "14%", right: "4%" }, size: "text-6xl", duration: 10, delay: 2 },
-  { char: "ƒ(x)", style: { top: "48%", left: "44%" }, size: "text-4xl", duration: 11, delay: 1.6 },
-  { char: "÷", style: { bottom: "30%", left: "12%" }, size: "text-5xl", duration: 8, delay: 2.4 },
+  { char: "∑", style: { top: "18%", left: "6%" }, size: "text-6xl", duration: 9, delay: 0 },
+  { char: "π", style: { top: "62%", left: "4%" }, size: "text-7xl", duration: 11, delay: 1.2 },
+  { char: "√x", style: { top: "20%", right: "7%" }, size: "text-5xl", duration: 10, delay: 0.6 },
+  { char: "∞", style: { bottom: "16%", right: "5%" }, size: "text-6xl", duration: 12, delay: 2 },
+  { char: "ƒ(x)", style: { top: "42%", right: "16%" }, size: "text-4xl", duration: 13, delay: 1.6 },
+  { char: "÷", style: { bottom: "28%", left: "13%" }, size: "text-5xl", duration: 10, delay: 2.4 },
 ];
 
 export function Hero() {
@@ -20,38 +20,15 @@ export function Hero() {
   ];
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center pt-20 bg-gradient-to-br from-blue-50 via-white to-teal-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
-      {/* Animated background shapes */}
-      <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          rotate: [0, 90, 0],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-        className="absolute top-20 right-0 w-96 h-96 bg-blue-200 dark:bg-blue-900 rounded-full opacity-20 blur-3xl"
-      />
-      <motion.div
-        animate={{
-          scale: [1, 1.3, 1],
-          rotate: [0, -90, 0],
-        }}
-        transition={{
-          duration: 15,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-        className="absolute bottom-0 left-0 w-96 h-96 bg-teal-200 dark:bg-teal-900 rounded-full opacity-20 blur-3xl"
-      />
-
-      {/* Suzuvchi matematik belgilar */}
+    <section
+      id="hero"
+      className="relative pt-32 pb-24 bg-white dark:bg-black overflow-hidden transition-colors"
+    >
+      {/* Suzuvchi matematik belgilar — juda sokin */}
       {mathSymbols.map((symbol, index) => (
         <motion.span
           key={index}
-          animate={{ y: [0, -22, 0], rotate: [0, 6, -6, 0] }}
+          animate={{ y: [0, -18, 0], rotate: [0, 5, -5, 0] }}
           transition={{
             duration: symbol.duration,
             delay: symbol.delay,
@@ -59,171 +36,134 @@ export function Hero() {
             ease: "easeInOut",
           }}
           style={symbol.style}
-          className={`absolute ${symbol.size} font-bold text-[#32368d]/10 dark:text-white/10 select-none pointer-events-none`}
+          className={`absolute ${symbol.size} font-semibold text-[#32368d]/[0.06] dark:text-white/[0.06] select-none pointer-events-none`}
           aria-hidden="true"
         >
           {symbol.char}
         </motion.span>
       ))}
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-              <span className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                🎓 O'zbekistondagi eng katta Matematika o'quv markazi
-              </span>
-            </motion.div>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="text-[#ff5e2c] font-semibold mb-4"
+        >
+          O'zbekistondagi eng katta matematika o'quv markazi
+        </motion.p>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
-            >
-              <span className="bg-gradient-to-r from-[#32368d] to-[#ff5e2c] bg-clip-text text-transparent">
-                Qorako'l Ziyo
-              </span>
-              <br />
-              <span className="text-gray-800 dark:text-white">Matematika kurslari</span>
-            </motion.h1>
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+          className="text-5xl md:text-7xl font-semibold tracking-tight text-gray-900 dark:text-white mb-6 leading-[1.05]"
+        >
+          Matematika.
+          <br />
+          <span className="bg-gradient-to-r from-[#32368d] to-[#ff5e2c] bg-clip-text text-transparent">
+            Yangi darajada.
+          </span>
+        </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-              className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
-            >
-              2-sinfdan 11-sinfgacha professional matematika ta'limi.
-              Zamonaviy ta'lim usullari va tajribali o'qituvchilar bilan
-              bilimingizni yangi bosqichga olib chiqing!
-            </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+          className="text-xl md:text-2xl text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed"
+        >
+          2-sinfdan 11-sinfgacha professional matematika ta'limi.
+          Tajribali o'qituvchilar. Isbotlangan natijalar.
+        </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-              className="flex flex-wrap gap-4 mb-12"
-            >
-              <motion.a
-                whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(50, 54, 141, 0.3)" }}
-                whileTap={{ scale: 0.95 }}
-                href="https://qorakol-ziyo.tilda.ws/math-form"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gradient-to-r from-[#32368d] to-[#ff5e2c] text-white px-8 py-4 rounded-lg font-medium shadow-lg hover:shadow-xl transition-all text-lg cursor-pointer"
-              >
-                Ro'yxatdan o'tish
-              </motion.a>
-              <motion.button
-                whileHover={{ scale: 1.05, borderColor: "#32368d" }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() =>
-                  document
-                    .getElementById("courses")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-8 py-4 rounded-lg font-medium shadow-lg hover:shadow-xl transition-all border-2 border-gray-200 dark:border-gray-700 text-lg"
-              >
-                Kurslarni ko'rish
-              </motion.button>
-            </motion.div>
-
-            {/* Feature Pills */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-4"
-            >
-              {features.map((feature, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.5, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ 
-                    duration: 0.5, 
-                    delay: 0.9 + index * 0.1,
-                    type: "spring",
-                    stiffness: 100
-                  }}
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md flex flex-col items-center gap-2 text-center cursor-pointer"
-                >
-                  <feature.icon className="size-6 text-[#32368d]" />
-                  <span className="text-xs text-gray-700 dark:text-gray-300">{feature.text}</span>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Right Content - Animated Cards */}
-          <motion.div
-            initial={{ opacity: 0, x: 100, scale: 0.8 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-            className="relative hidden lg:block"
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+          className="flex flex-wrap items-center justify-center gap-5 mb-14"
+        >
+          <a
+            href="https://qorakol-ziyo.tilda.ws/math-form"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[#32368d] text-white px-7 py-3 rounded-full text-[17px] font-medium hover:opacity-90 transition-opacity"
           >
-            <div className="relative h-[600px]">
-              {/* Main Card */}
-              <motion.div
-                animate={{
-                  y: [0, -20, 0],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="absolute top-0 left-0 right-0 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 z-10"
-              >
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="bg-gradient-to-br from-[#32368d] to-[#ff5e2c] p-3 rounded-xl">
-                    <GraduationCap className="size-8 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl dark:text-white">24000+</h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">Bitiruvchilar</p>
-                  </div>
-                </div>
-                <div className="bg-gradient-to-br from-blue-50 to-orange-50 dark:from-gray-700 dark:to-gray-700 rounded-xl p-6">
-                  <img
-                    src={buildingImage}
-                    alt="Qorako'l Ziyo Building"
-                    className="w-full h-48 object-cover rounded-lg"
-                  />
-                </div>
-              </motion.div>
+            Ro'yxatdan o'tish
+          </a>
+          <button
+            onClick={() =>
+              document
+                .getElementById("courses")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            className="inline-flex items-center gap-1 text-[17px] text-[#32368d] dark:text-[#8f94e8] hover:underline underline-offset-4"
+          >
+            Kurslarni ko'rish
+            <ChevronRight className="size-4" />
+          </button>
+        </motion.div>
 
-              {/* Secondary Card */}
-              <motion.div
-                animate={{
-                  y: [0, 20, 0],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 0.5,
-                }}
-                className="absolute bottom-0 right-0 left-12 bg-gradient-to-br from-[#32368d] to-[#ff5e2c] rounded-2xl shadow-2xl p-8 text-white"
-              >
-                <h3 className="font-bold text-2xl mb-2">98%</h3>
-                <p className="text-white/80 mb-4">Talabalar mamnuniyati</p>
-                <div className="flex gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-2xl">⭐</span>
-                  ))}
-                </div>
-              </motion.div>
+        {/* Bino rasmi — markazda, katta radius */}
+        <motion.div
+          initial={{ opacity: 0, y: 40, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.9, delay: 0.4, ease: "easeOut" }}
+          className="relative"
+        >
+          <img
+            src={buildingImage}
+            alt="Qorako'l Ziyo binosi"
+            className="w-full max-h-[420px] object-cover rounded-3xl shadow-2xl"
+          />
+
+          {/* Shisha chiplar */}
+          <motion.div
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-5 left-4 md:left-8 bg-white/70 dark:bg-black/50 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-2xl px-5 py-3 text-left shadow-lg"
+          >
+            <div className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+              24 000+
+            </div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">Bitiruvchilar</div>
+          </motion.div>
+
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+            className="absolute -bottom-5 right-4 md:right-8 bg-white/70 dark:bg-black/50 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-2xl px-5 py-3 text-left shadow-lg"
+          >
+            <div className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+              98%
+            </div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">
+              Talabalar mamnuniyati
             </div>
           </motion.div>
-        </div>
+        </motion.div>
+
+        {/* Feature chiplar */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3"
+        >
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.8 + index * 0.08 }}
+              className="flex items-center justify-center gap-2 rounded-full border border-black/10 dark:border-white/10 bg-white dark:bg-[#1d1d1f] px-4 py-2.5"
+            >
+              <feature.icon className="size-4 text-[#32368d] dark:text-[#8f94e8]" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">
+                {feature.text}
+              </span>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

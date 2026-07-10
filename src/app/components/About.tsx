@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Target, Eye, Heart, Zap } from "lucide-react";
+import { Target, Eye, Heart, Zap, Check } from "lucide-react";
 const officeImage = "/assets/about-image.jpg";
 
 export function About() {
@@ -7,140 +7,108 @@ export function About() {
     {
       icon: Target,
       title: "Maqsadimiz",
-      description: "Har bir talabaga sifatli ta'lim berish va ularning kelajagini yorug'lashtirish",
-      color: "from-blue-500 to-blue-600",
+      description:
+        "Har bir talabaga sifatli ta'lim berish va ularning kelajagini yorug'lashtirish",
     },
     {
       icon: Eye,
       title: "Vazifamiz",
-      description: "Zamonaviy o'quv dasturlari va professional o'qituvchilar orqali bilim berish",
-      color: "from-teal-500 to-teal-600",
+      description:
+        "Zamonaviy o'quv dasturlari va professional o'qituvchilar orqali bilim berish",
     },
     {
       icon: Heart,
       title: "Qadriyatlarimiz",
       description: "Halollik, mas'uliyat, samimiylik va doimiy rivojlanish",
-      color: "from-purple-500 to-purple-600",
     },
     {
       icon: Zap,
       title: "Innovatsiya",
-      description: "Eng so'nggi texnologiyalar va o'qitish metodlaridan foydalanish",
-      color: "from-orange-500 to-orange-600",
+      description:
+        "Eng so'nggi texnologiyalar va o'qitish metodlaridan foydalanish",
     },
   ];
 
+  const reasons = [
+    "Professional va tajribali o'qituvchilar jamoasi",
+    "Kichik guruhlar - har bir talabaga individual yondashuv",
+    "Zamonaviy texnologiyalar va o'quv materiallari",
+    "Qulay o'quv xonalari va zamonaviy jihozlar",
+    "Moslashuvchan jadval va turli kurs variantlari",
+    "Doimiy maslahat va qo'llab-quvvatlash",
+  ];
+
   return (
-    <section id="about" className="py-24 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-24 bg-[#f5f5f7] dark:bg-[#161617] transition-colors">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <span className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-4">
-            Biz haqimizda
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-[#32368d] to-[#ff5e2c] bg-clip-text text-transparent">
-              Qorako'l Ziyo
-            </span>{" "}
-            <span className="dark:text-white">O'quv Markazi</span>
+          <p className="text-[#ff5e2c] font-semibold mb-3">Biz haqimizda</p>
+          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900 dark:text-white mb-5">
+            Qorako'l Ziyo O'quv Markazi
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
             2012-yilda tashkil etilgan markazimiz 14 yillik tajriba bilan minglab
-            talabalarni muvaffaqiyatli kelajakka yo'naltirdi. Biz faqat bilim
-            bermasdan, balki har bir talabaning qobiliyatini rivojlantiramiz.
+            talabalarni muvaffaqiyatli kelajakka yo'naltirdi.
           </p>
         </motion.div>
 
-        {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-12 mb-16">
+        <div className="grid lg:grid-cols-2 gap-10 mb-16 items-center">
           {/* Image */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7 }}
             className="relative"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src={officeImage}
-                alt="Modern Education"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-            </div>
-            {/* Floating stat card */}
+            <img
+              src={officeImage}
+              alt="Qorako'l Ziyo o'quv markazi"
+              className="w-full h-full object-cover rounded-3xl shadow-lg"
+            />
             <motion.div
-              animate={{
-                y: [0, -10, 0],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="absolute -bottom-6 -right-6 bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-6"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -bottom-5 -right-3 md:-right-5 bg-white/80 dark:bg-black/60 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-2xl px-6 py-4 shadow-lg text-center"
             >
-              <div className="text-center">
-                <div className="text-4xl font-bold bg-gradient-to-r from-[#32368d] to-[#ff5e2c] bg-clip-text text-transparent">
-                  14+
-                </div>
-                <div className="text-gray-600 dark:text-gray-400 text-sm font-medium">
-                  Yillik tajriba
-                </div>
+              <div className="text-3xl font-semibold tracking-tight bg-gradient-to-r from-[#32368d] to-[#ff5e2c] bg-clip-text text-transparent">
+                14+
               </div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">Yillik tajriba</div>
             </motion.div>
           </motion.div>
 
           {/* Text Content */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
             className="flex flex-col justify-center"
           >
-            <h3 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">
+            <h3 className="text-2xl md:text-3xl font-semibold tracking-tight mb-8 text-gray-900 dark:text-white">
               Nima uchun aynan bizni tanlashingiz kerak?
             </h3>
-            <div className="space-y-4 mb-8">
-              {[
-                "Professional va tajribali o'qituvchilar jamoasi",
-                "Kichik guruhlar - har bir talabaga individual yondashuv",
-                "Zamonaviy texnologiyalar va o'quv materiallari",
-                "Qulay o'quv xonalari va zamonaviy jihozlar",
-                "Moslashuvchan jadval va turli kurs variantlari",
-                "Doimiy maslahat va qo'llab-quvvatlash",
-              ].map((item, index) => (
+            <div className="space-y-4">
+              {reasons.map((item, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -16 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  transition={{ duration: 0.4, delay: index * 0.08 }}
                   className="flex items-start gap-3"
                 >
-                  <div className="bg-gradient-to-br from-[#32368d] to-[#ff5e2c] rounded-full p-1 mt-1">
-                    <svg
-                      className="size-4 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={3}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </div>
-                  <p className="text-gray-700 dark:text-gray-300">{item}</p>
+                  <span className="mt-1 flex size-5 items-center justify-center rounded-full bg-[#32368d]">
+                    <Check className="size-3 text-white" strokeWidth={3} />
+                  </span>
+                  <p className="text-[17px] text-gray-700 dark:text-gray-300">{item}</p>
                 </motion.div>
               ))}
             </div>
@@ -148,26 +116,26 @@ export function About() {
         </div>
 
         {/* Values Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {values.map((value, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-700"
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              whileHover={{ y: -4 }}
+              className="bg-white dark:bg-[#1d1d1f] p-7 rounded-3xl shadow-sm hover:shadow-md transition-shadow"
             >
-              <div
-                className={`bg-gradient-to-br ${value.color} p-3 rounded-lg inline-block mb-4`}
-              >
-                <value.icon className="size-6 text-white" />
-              </div>
-              <h4 className="font-bold text-lg mb-2 text-gray-800 dark:text-white">
+              <span className="inline-flex size-11 items-center justify-center rounded-2xl bg-[#32368d]/10 dark:bg-white/10 mb-5">
+                <value.icon className="size-5 text-[#32368d] dark:text-[#8f94e8]" />
+              </span>
+              <h4 className="font-semibold text-lg tracking-tight mb-2 text-gray-900 dark:text-white">
                 {value.title}
               </h4>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">{value.description}</p>
+              <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                {value.description}
+              </p>
             </motion.div>
           ))}
         </div>

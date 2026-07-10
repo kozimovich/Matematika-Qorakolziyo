@@ -5,6 +5,7 @@ import {
   Clock,
   Instagram,
   MessageCircle,
+  Check,
 } from "lucide-react";
 
 export function Contact() {
@@ -14,21 +15,18 @@ export function Contact() {
       title: "Telefon raqam",
       content: "+998 78 555 8 555",
       link: "tel:+998785558555",
-      color: "from-blue-500 to-blue-600",
     },
     {
       icon: MapPin,
       title: "Manzillarimiz",
       content: "Chorsu, Olmazor, Shahriston, Universam, Novza, Sergeli",
       link: "https://t.me/qorakolziyo_manzillar",
-      color: "from-teal-500 to-teal-600",
     },
     {
       icon: Clock,
       title: "Ish vaqti",
       content: "08:00 - 18:00",
       link: null,
-      color: "from-purple-500 to-purple-600",
     },
   ];
 
@@ -38,88 +36,86 @@ export function Contact() {
       name: "Instagram",
       username: "@qorakolziyo",
       link: "https://instagram.com/qorakolziyo",
-      color: "from-pink-500 to-purple-600",
     },
     {
       icon: MessageCircle,
       name: "Telegram",
       username: "@qorakolziyo",
       link: "https://t.me/qorakolziyo",
-      color: "from-blue-500 to-blue-600",
     },
   ];
 
+  const benefits = [
+    "Bepul konsultatsiya va yo'l-yo'riq",
+    "Kurs va narxlar to'g'risida batafsil ma'lumot",
+    "Maxsus chegirmalar va takliflar",
+    "Moslashuvchan to'lov rejalari",
+  ];
+
   return (
-    <section id="contact" className="py-24 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-24 bg-[#f5f5f7] dark:bg-[#161617] transition-colors">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <span className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-4">
-            Biz bilan bog'laning
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-[#32368d] to-[#ff5e2c] bg-clip-text text-transparent">
-              Aloqa Ma'lumotlari
-            </span>
+          <p className="text-[#ff5e2c] font-semibold mb-3">Biz bilan bog'laning</p>
+          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900 dark:text-white mb-5">
+            Aloqa ma'lumotlari
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto">
             Savollaringiz bormi? Biz bilan bog'laning yoki to'g'ridan-to'g'ri
             tashrif buyuring
           </p>
         </motion.div>
 
         {/* Contact Info Cards */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          {contactInfo.map((info, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
-            >
-              {info.link ? (
-                <a
-                  href={info.link}
-                  target={info.link.startsWith("http") ? "_blank" : undefined}
-                  rel={
-                    info.link.startsWith("http")
-                      ? "noopener noreferrer"
-                      : undefined
-                  }
-                  className="block bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all p-6 border border-gray-100 dark:border-gray-700 h-full"
-                >
-                  <div
-                    className={`bg-gradient-to-br ${info.color} size-12 rounded-lg flex items-center justify-center mb-4`}
+        <div className="grid md:grid-cols-3 gap-4 mb-12">
+          {contactInfo.map((info, index) => {
+            const inner = (
+              <>
+                <span className="inline-flex size-11 items-center justify-center rounded-2xl bg-[#32368d]/10 dark:bg-white/10 mb-5">
+                  <info.icon className="size-5 text-[#32368d] dark:text-[#8f94e8]" />
+                </span>
+                <h4 className="font-semibold text-lg tracking-tight mb-1.5 text-gray-900 dark:text-white">
+                  {info.title}
+                </h4>
+                <p className="text-gray-500 dark:text-gray-400">{info.content}</p>
+              </>
+            );
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                whileHover={{ y: -4 }}
+              >
+                {info.link ? (
+                  <a
+                    href={info.link}
+                    target={info.link.startsWith("http") ? "_blank" : undefined}
+                    rel={
+                      info.link.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                    className="block bg-white dark:bg-[#1d1d1f] rounded-3xl p-7 h-full shadow-sm hover:shadow-lg transition-shadow"
                   >
-                    <info.icon className="size-6 text-white" />
+                    {inner}
+                  </a>
+                ) : (
+                  <div className="bg-white dark:bg-[#1d1d1f] rounded-3xl p-7 h-full shadow-sm">
+                    {inner}
                   </div>
-                  <h4 className="font-bold text-lg mb-2 text-gray-800 dark:text-white">
-                    {info.title}
-                  </h4>
-                  <p className="text-gray-600 dark:text-gray-300">{info.content}</p>
-                </a>
-              ) : (
-                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-100 dark:border-gray-700 h-full">
-                  <div
-                    className={`bg-gradient-to-br ${info.color} size-12 rounded-lg flex items-center justify-center mb-4`}
-                  >
-                    <info.icon className="size-6 text-white" />
-                  </div>
-                  <h4 className="font-bold text-lg mb-2 text-gray-800 dark:text-white">
-                    {info.title}
-                  </h4>
-                  <p className="text-gray-600 dark:text-gray-300">{info.content}</p>
-                </div>
-              )}
-            </motion.div>
-          ))}
+                )}
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Social Media */}
@@ -130,56 +126,58 @@ export function Contact() {
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <h3 className="text-2xl font-bold text-center mb-6 text-gray-800 dark:text-white">
+          <h3 className="text-2xl font-semibold tracking-tight text-center mb-6 text-gray-900 dark:text-white">
             Ijtimoiy tarmoqlarda bizni kuzating
           </h3>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-3">
             {socialLinks.map((social, index) => (
-              <motion.a
+              <a
                 key={index}
                 href={social.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`bg-gradient-to-r ${social.color} text-white px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-shadow flex items-center gap-3`}
+                className="bg-white dark:bg-[#1d1d1f] rounded-full px-6 py-3 shadow-sm hover:shadow-md transition-shadow flex items-center gap-3"
               >
-                <social.icon className="size-6" />
+                <social.icon className="size-5 text-[#32368d] dark:text-[#8f94e8]" />
                 <div className="text-left">
-                  <div className="font-bold">{social.name}</div>
-                  <div className="text-sm opacity-90">{social.username}</div>
+                  <span className="font-medium text-gray-900 dark:text-white">
+                    {social.name}
+                  </span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400 ml-2">
+                    {social.username}
+                  </span>
                 </div>
-              </motion.a>
+              </a>
             ))}
           </div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="space-y-6"
-        >
+        <div className="grid lg:grid-cols-2 gap-4">
           {/* Quick Contact */}
-          <div className="bg-gradient-to-br from-[#32368d] to-[#ff5e2c] rounded-2xl p-8 text-white">
-            <h4 className="text-2xl font-bold mb-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="bg-[#32368d] rounded-3xl p-8 text-white"
+          >
+            <h4 className="text-2xl font-semibold tracking-tight mb-3">
               Tezkor bog'lanish uchun
             </h4>
-            <p className="text-white/90 mb-6">
-              Ish vaqti: 08:00–18:00. Telegram’da 24/7 yozishingiz mumkin
+            <p className="text-white/70 mb-6">
+              Ish vaqti: 08:00–18:00. Telegram'da 24/7 yozishingiz mumkin
               (javob ish vaqtida).
             </p>
             <div className="space-y-3">
               <a
                 href="tel:+998785558555"
-                className="block bg-white/20 backdrop-blur-sm rounded-lg p-4 hover:bg-white/30 transition-colors"
+                className="block bg-white/10 rounded-2xl p-4 hover:bg-white/15 transition-colors"
               >
                 <div className="flex items-center gap-3">
                   <Phone className="size-5" />
                   <div>
-                    <div className="text-sm opacity-80">Qo'ng'iroq qiling</div>
-                    <div className="font-bold">+998 78 555 8 555</div>
+                    <div className="text-sm text-white/60">Qo'ng'iroq qiling</div>
+                    <div className="font-semibold">+998 78 555 8 555</div>
                   </div>
                 </div>
               </a>
@@ -187,53 +185,42 @@ export function Contact() {
                 href="https://t.me/qorakolziyo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block bg-white/20 backdrop-blur-sm rounded-lg p-4 hover:bg-white/30 transition-colors"
+                className="block bg-white/10 rounded-2xl p-4 hover:bg-white/15 transition-colors"
               >
                 <div className="flex items-center gap-3">
                   <MessageCircle className="size-5" />
                   <div>
-                    <div className="text-sm opacity-80">Telegram</div>
-                    <div className="font-bold">@qorakolziyo</div>
+                    <div className="text-sm text-white/60">Telegram</div>
+                    <div className="font-semibold">@qorakolziyo</div>
                   </div>
                 </div>
               </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Additional benefits */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
-            <h4 className="font-bold text-lg mb-4 text-gray-800 dark:text-white">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="bg-white dark:bg-[#1d1d1f] rounded-3xl p-8 shadow-sm"
+          >
+            <h4 className="font-semibold text-lg tracking-tight mb-5 text-gray-900 dark:text-white">
               Nima uchun bugun qo'ng'iroq qilishingiz kerak?
             </h4>
-            <ul className="space-y-3">
-              {[
-                "Bepul konsultatsiya va yo'l-yo'riq",
-                "Kurs va narxlar to'g'risida batafsil ma'lumot",
-                "Maxsus chegirmalar va takliflar",
-                "Moslashuvchan to'lov rejalari",
-              ].map((item, index) => (
-                <li key={index} className="flex items-start gap-2">
-                  <div className="bg-gradient-to-br from-[#32368d] to-[#ff5e2c] rounded-full p-1 mt-0.5">
-                    <svg
-                      className="size-3 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={3}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </div>
+            <ul className="space-y-3.5">
+              {benefits.map((item, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <span className="mt-0.5 flex size-5 items-center justify-center rounded-full bg-[#32368d]">
+                    <Check className="size-3 text-white" strokeWidth={3} />
+                  </span>
                   <span className="text-gray-700 dark:text-gray-300">{item}</span>
                 </li>
               ))}
             </ul>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

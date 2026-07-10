@@ -20,7 +20,6 @@ export function Teachers() {
         "27 ta Al-Xorazmiy maktabi",
         "Ko'plab Xalqaro va Respublika olimpiada g'oliblari ustozi",
       ],
-      color: "from-blue-500 to-blue-600",
     },
     {
       name: "Jumayev Sherzod",
@@ -34,18 +33,12 @@ export function Teachers() {
         "50+ JIDU talabasi",
         "170+ Xalqaro Westminster Universitet talabasi",
       ],
-      color: "from-teal-500 to-teal-600",
     },
     {
       name: "Ergashov Doniyor",
       experience: "14 yillik tajriba",
       achievements: [],
-      stats: [
-        "7 ta Mirzo Ulug'bek",
-        "50+ Akademik litsey",
-        "1000+ abituriyent",
-      ],
-      color: "from-purple-500 to-purple-600",
+      stats: ["7 ta Mirzo Ulug'bek", "50+ Akademik litsey", "1000+ abituriyent"],
     },
     {
       name: "Ro'ziyev Baxtiyor",
@@ -55,7 +48,6 @@ export function Teachers() {
         "2008-2009 - Oliy matematika fanidan Respublika 1-o'rin",
       ],
       stats: ["1400+ abituriyentlar"],
-      color: "from-indigo-500 to-indigo-600",
     },
     {
       name: "Abdulxayev Ulug'bek",
@@ -64,12 +56,7 @@ export function Teachers() {
         "2011 - Fizika bo'yicha Respublika 1-o'rin",
         "4 ta Fizika bo'yicha O'zbekiston terma jamoa a'zosi",
       ],
-      stats: [
-        "1400+ abituriyentlar",
-        "50+ Gubkina grant",
-        "15+ INHA grant",
-      ],
-      color: "from-orange-500 to-orange-600",
+      stats: ["1400+ abituriyentlar", "50+ Gubkina grant", "15+ INHA grant"],
     },
     {
       name: "Fayzullayev Sunnat",
@@ -81,18 +68,12 @@ export function Teachers() {
         "250+ TATU talabasi",
         "15+ JIDU talabasi",
       ],
-      color: "from-green-500 to-green-600",
     },
     {
       name: "Bobomurodov Shaxzod",
       experience: "13 yillik tajriba",
       achievements: ["2013 - Fizika fanidan Respublikada 1-o'rin"],
-      stats: [
-        "1000+ abituriyentlar",
-        "15+ INHA talabasi",
-        "15+ Gubkina talabasi",
-      ],
-      color: "from-pink-500 to-pink-600",
+      stats: ["1000+ abituriyentlar", "15+ INHA talabasi", "15+ Gubkina talabasi"],
     },
     {
       name: "Safoyev Sherzod",
@@ -108,109 +89,99 @@ export function Teachers() {
         "80+ Gubkina talabasi",
         "50+ JIDU talabasi",
       ],
-      color: "from-red-500 to-red-600",
     },
   ];
 
   return (
-    <section id="teachers" className="py-24 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="teachers" className="py-24 bg-[#f5f5f7] dark:bg-[#161617] transition-colors">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <span className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-4">
-            Bizning Jamoa
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-[#32368d] to-[#ff5e2c] bg-clip-text text-transparent">
-              Professional O'qituvchilar
-            </span>
+          <p className="text-[#ff5e2c] font-semibold mb-3">Bizning jamoa</p>
+          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900 dark:text-white mb-5">
+            Professional o'qituvchilar
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Tajribali va malakali o'qituvchilar bilan o'rganing. Har bir ustoz
-            o'z sohasida ko'p yillik tajribaga ega
+          <p className="text-xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto">
+            Har bir ustoz o'z sohasida ko'p yillik tajribaga ega
           </p>
         </motion.div>
 
         {/* Teachers Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {teachers.map((teacher, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30, rotateY: -20 }}
-              whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ 
-                duration: 0.6, 
-                delay: index * 0.1,
-                ease: "easeOut"
-              }}
-              whileHover={{ 
-                y: -10,
-                rotateY: 5,
-                transition: { duration: 0.3 }
-              }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all border border-gray-100 dark:border-gray-700 overflow-hidden cursor-pointer"
+              transition={{ duration: 0.5, delay: (index % 4) * 0.08, ease: "easeOut" }}
+              whileHover={{ y: -5 }}
+              className="bg-white dark:bg-[#1d1d1f] rounded-3xl p-6 shadow-sm hover:shadow-lg transition-shadow"
             >
-              <div className={`bg-gradient-to-br ${teacher.color} h-2`} />
-
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div
-                    className={`bg-gradient-to-br ${teacher.color} size-16 rounded-full flex items-center justify-center shadow-lg`}
-                  >
-                    <span className="text-2xl font-bold text-white">
-                      {teacher.name.charAt(0)}
-                    </span>
-                  </div>
-                  <div className="bg-yellow-50 dark:bg-yellow-900/30 rounded-lg px-3 py-1 flex items-center gap-1">
-                    <Star className="size-4 fill-yellow-400 text-yellow-400" />
-                    <span className="font-bold text-gray-800 dark:text-yellow-200">5.0</span>
-                  </div>
+              <div className="flex items-center justify-between mb-5">
+                <div className="flex size-14 items-center justify-center rounded-full bg-[#32368d]">
+                  <span className="text-xl font-semibold text-white">
+                    {teacher.name.charAt(0)}
+                  </span>
                 </div>
+                <div className="flex items-center gap-1 rounded-full bg-black/5 dark:bg-white/10 px-3 py-1">
+                  <Star className="size-3.5 fill-yellow-400 text-yellow-400" />
+                  <span className="text-sm font-medium text-gray-800 dark:text-gray-200">
+                    5.0
+                  </span>
+                </div>
+              </div>
 
-                <h4 className="font-bold text-lg mb-1 text-gray-800 dark:text-gray-300">
-                  {teacher.name}
-                </h4>
-                <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">{teacher.experience}</p>
+              <h4 className="font-semibold text-lg tracking-tight mb-0.5 text-gray-900 dark:text-white">
+                {teacher.name}
+              </h4>
+              <p className="text-gray-500 dark:text-gray-400 mb-5 text-sm">
+                {teacher.experience}
+              </p>
 
-                {teacher.achievements.length > 0 && (
-                  <div className="mb-4 pb-4 border-b border-gray-100 dark:border-gray-700">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Award className="size-4 text-blue-600" />
-                      <p className="font-semibold text-sm text-gray-800 dark:text-gray-300">
-                        Yutuqlari:
-                      </p>
-                    </div>
-                    <ul className="space-y-1">
-                      {teacher.achievements.map((achievement, idx) => (
-                        <li key={idx} className="text-xs text-gray-600 dark:text-gray-400 pl-2">
-                          • {achievement}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                <div className="space-y-2">
+              {teacher.achievements.length > 0 && (
+                <div className="mb-4 pb-4 border-b border-black/5 dark:border-white/10">
                   <div className="flex items-center gap-2 mb-2">
-                    <BookOpen className="size-4 text-blue-600" />
-                    <p className="font-semibold text-sm text-gray-800 dark:text-gray-300">
-                      Natijalar:
+                    <Award className="size-4 text-[#ff5e2c]" />
+                    <p className="font-medium text-sm text-gray-900 dark:text-white">
+                      Yutuqlari
                     </p>
                   </div>
-                  <ul className="space-y-1">
-                    {teacher.stats.map((stat, idx) => (
-                      <li key={idx} className="text-xs text-gray-600 dark:text-gray-400 pl-2">
-                        • {stat}
+                  <ul className="space-y-1.5">
+                    {teacher.achievements.map((achievement, idx) => (
+                      <li
+                        key={idx}
+                        className="text-xs leading-relaxed text-gray-500 dark:text-gray-400"
+                      >
+                        {achievement}
                       </li>
                     ))}
                   </ul>
                 </div>
+              )}
+
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <BookOpen className="size-4 text-[#32368d] dark:text-[#8f94e8]" />
+                  <p className="font-medium text-sm text-gray-900 dark:text-white">
+                    Natijalar
+                  </p>
+                </div>
+                <ul className="space-y-1.5">
+                  {teacher.stats.map((stat, idx) => (
+                    <li
+                      key={idx}
+                      className="text-xs leading-relaxed text-gray-500 dark:text-gray-400"
+                    >
+                      {stat}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </motion.div>
           ))}
@@ -222,21 +193,19 @@ export function Teachers() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mt-12"
+          className="text-center mt-14"
         >
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
+          <p className="text-gray-500 dark:text-gray-400 mb-5">
             Professional o'qituvchilar bilan o'rganishni boshlang
           </p>
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <a
             href="https://qorakol-ziyo.tilda.ws/math-form"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-gradient-to-r from-[#32368d] to-[#ff5e2c] text-white px-8 py-4 rounded-lg font-medium shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+            className="inline-block bg-[#32368d] text-white px-7 py-3 rounded-full text-[17px] font-medium hover:opacity-90 transition-opacity"
           >
             Bepul konsultatsiya olish
-          </motion.a>
+          </a>
         </motion.div>
       </div>
     </section>
